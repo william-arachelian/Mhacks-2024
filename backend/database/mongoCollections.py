@@ -1,6 +1,6 @@
-from helpers import is_valid_ingredient, is_valid_id
+from database.helpers import is_valid_ingredient, is_valid_id
 from datetime import datetime
-from mongoConnection import get_database
+from database.mongoConnection import get_database
 from bson.objectid import ObjectId
 
 # Schemas:
@@ -25,6 +25,7 @@ def get_ingredients():
         ingredientsCollection = db['ingredients']
 
         res = ingredientsCollection.find()
+        
         return res
     except Exception as e:
         print(e)
@@ -63,7 +64,7 @@ def add_ingredient(input:dict):
         ingredientObj = {
             "name": input['name'],
             "date": datetime.now(),
-            "quantity": input.quantity if input.get('quantity') != None else 1
+            "quantity": input['quantity'] if input.get('quantity') != None else 1
         }
 
         db = get_database()
