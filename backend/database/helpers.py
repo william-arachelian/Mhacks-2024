@@ -1,7 +1,7 @@
 from bson.objectid import ObjectId
 
 def is_valid_ingredient(input):
-        print(input)
+        
         if input.get('name') == None:
             print('name attribute does not exist')
             return False
@@ -15,6 +15,37 @@ def is_valid_ingredient(input):
             return False
         
         return True
+
+def is_valid_recipe(input):
+    
+    if input.get('name') == None:
+        print('name attribute does not exist')
+        return False
+    
+    if type(input['name']) is not str:
+        print('name attribute must be of type string')
+        return False
+    
+    if input.get('description') == None:
+        print('description attribute does not exist')
+        return False
+    
+    if type(input['description']) is not str:
+        print('description attribute must be of type string')
+        return False
+    
+    if input.get('ingredients') == None:
+        print('ingredients attribute does not exist')
+        return False
+    
+    for i in range(0, len(input['ingredients'])):
+        ingredient = input['ingredients'][i]
+        if not is_valid_ingredient(ingredient):
+            print(f'ingredient {ingredient['_id']} in ingredients attribute is invalid')
+
+            return False
+    
+    return True
 
 def is_valid_id(id):
      
