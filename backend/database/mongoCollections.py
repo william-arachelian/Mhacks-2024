@@ -14,7 +14,7 @@ from bson.objectid import ObjectId
 # recipes {
 #     name: str
 #     ingredients[]: arr[Obj]
-#     description: str
+#     instructions[]: arr[str]
 #     rating(?): int
 # }
 
@@ -151,7 +151,7 @@ def add_recipe(input: dict):
         
         recipeObj = {
             "name": input['name'],
-            "description": input['description'],
+            "instructions": input['instructions'],
             "rating": input['rating'] if input.get('rating') != None else -1,
             "ingredients": input['ingredients']
         }
