@@ -1,5 +1,6 @@
 from mongoCollections import * 
 from mongoCollections import get_database
+from random import randint
 
 db = get_database()
 ingredientsCollection = db['ingredients']
@@ -39,7 +40,26 @@ for i in range(0, len(ingredient_names)):
         }
         
         res = add_ingredient(ingredientObj)
-        # print(res)
+        print(res)
+    except Exception as e:
+        print(e)
+
+
+for i in range(1, 26):
+    try:
+        name = f"test {i}"
+        description = f"test {i} description"
+        ingredients = [{"name": ingredient_name } for ingredient_name in [ingredient_names[j] for j in [randint(0, len(ingredient_names)-1) for _ in range(1, randint(2, 10))]]]
+        
+        recipeObj = {
+            "name": name,
+            "description": description,
+            "ingredients": ingredients
+        }
+
+        res = add_recipe(recipeObj)
+        print(res)
+
     except Exception as e:
         print(e)
 
