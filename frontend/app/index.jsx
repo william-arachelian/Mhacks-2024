@@ -12,7 +12,6 @@ export default function Page() {
       <Button label="Recipe Generator" link="../app/RecipeGenerator"/>
       </Link>
     </View>
-
   );
 }
 
