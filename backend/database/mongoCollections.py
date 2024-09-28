@@ -1,5 +1,5 @@
 from helpers import is_valid_ingredient, is_valid_id
-from datetime import date
+from datetime import datetime
 from mongoConnection import get_database
 from bson.objectid import ObjectId
 
@@ -17,13 +17,6 @@ from bson.objectid import ObjectId
 #     description: str
 #     rating(?): int
 # }
-
-# def get_database():
-#     # connects to mhacks2024 db
-#     CONNECTION_STRING = "mongodb://localhost:27017"
-#     client = MongoClient(CONNECTION_STRING)
- 
-#     return client['mhacks2024']
 
 def get_ingredients():
     # returns a list of all ingredient objects in ingredients collection
@@ -68,8 +61,8 @@ def add_ingredient(input:dict):
             raise ValueError("invalid ingredient input")
         
         ingredientObj = {
-            "name": input.name,
-            "date": date.today(),
+            "name": input['name'],
+            "date": datetime.now(),
             "quantity": input.quantity if input.get('quantity') != None else 1
         }
 
