@@ -10,7 +10,7 @@ const TextInputExample = () => {
         style={styles.input}
         onChangeText={onChangeNumber}
         value={number}
-        placeholder="useless placeholder"
+        placeholder="Enter Food for Recipe"
         keyboardType=""
       />
     </SafeAreaView>
