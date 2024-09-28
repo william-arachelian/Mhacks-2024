@@ -41,7 +41,7 @@ def is_valid_recipe(input):
     for i in range(0, len(input['ingredients'])):
         ingredient = input['ingredients'][i]
         if not is_valid_ingredient(ingredient):
-            print(f'ingredient {ingredient['_id']} in ingredients attribute is invalid')
+            print(f'ingredient in ingredients attribute is invalid')
 
             return False
     
