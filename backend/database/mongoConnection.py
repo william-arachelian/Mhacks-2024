@@ -6,3 +6,5 @@ def get_database():
  
     return client['mhacks2024']
 
+if __name__ == '__main__':
+    get_database()

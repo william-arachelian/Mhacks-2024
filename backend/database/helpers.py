@@ -1,7 +1,7 @@
 from bson.objectid import ObjectId
 
 def is_valid_ingredient(input):
-
+        print(input)
         if input.get('name') == None:
             print('name attribute does not exist')
             return False
