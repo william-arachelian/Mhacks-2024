@@ -27,12 +27,36 @@ from bson.objectid import ObjectId
 
 def get_ingredients():
     # returns a list of all ingredient objects in ingredients collection
-    
-    db = get_database()
-    ingredientsCollection = db['ingredients']
+    try:
+        db = get_database()
+        ingredientsCollection = db['ingredients']
 
-    res = ingredientsCollection.find()
-    return res
+        res = ingredientsCollection.find()
+        return res
+    except Exception as e:
+        print(e)
+
+def get_ingredient(id):
+    # returns ingredient object with an _id of id
+
+    try:
+        if not is_valid_id(id):
+            raise ValueError('invalid id string')
+        
+        db = get_database()
+        ingredientsCollection = db['ingredients']
+
+        filter = {"_id": ObjectId(id)}
+        res = ingredientsCollection.find_one(filter)
+
+        if res:
+            return res
+        else:
+            raise ValueError(f"ingredient with id {id} not found")
+    except Exception as e:
+        print(e)
+
+
 
 def add_ingredient(input:dict):
     # adds a new ingredient object with parameters in input dictionary
