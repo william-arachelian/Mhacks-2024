@@ -72,8 +72,11 @@ def add_ingredient(input:dict):
         ingredientsCollection = db['ingredients']
 
         res = ingredientsCollection.insert_one(ingredientObj)
-
-        return res
+        if res:
+            ingredientObj["id"] = res.inserted_id
+        else:
+            raise ValueError("Insertion Failed")
+        return ingredientObj
         
     except Exception as e:
         print(e)
@@ -94,9 +97,9 @@ def delete_ingredient(id: str):
         res = ingredientsCollection.delete_one(filter)
 
         if (res.deleted_count > 0):
-            print("ingredient successfully deleted")
+            return {"deleted": filter}
         else:
-            print("deletion failed")
+            raise ValueError("Delete failed")
 
 
     except Exception as e:
@@ -158,7 +161,11 @@ def add_recipe(input: dict):
 
         res = recipesCollection.insert_one(recipeObj)
 
-        return res
+        if res:
+            recipeObj["id"] = res.inserted_id
+        else:
+            raise ValueError("Insertion Failed")
+        return recipeObj
         
     except Exception as e:
         print(e)
@@ -179,9 +186,9 @@ def delete_recipe(id: str):
         res = recipesCollection.delete_one(filter)
 
         if (res.deleted_count > 0):
-            print("recipe successfully deleted")
+            return {"deleted": filter} 
         else:
-            print("deletion failed")
+            raise ValueError("recipe deletion failed")
 
     except Exception as e:
         print(e)

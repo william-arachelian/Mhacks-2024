@@ -13,6 +13,10 @@ def is_valid_ingredient(input):
         if (input.get('quantity') != None and type(input['quantity']) is not int):
             print('quantity attribute must be of type int')    
             return False
+        for key in input.keys():
+            if not ("name" == key or "date" == key or "quantity" == key):
+                print("schema not correct")
+                return False
         
         return True
 
@@ -37,6 +41,12 @@ def is_valid_recipe(input):
     if input.get('ingredients') == None:
         print('ingredients attribute does not exist')
         return False
+    
+    for key in input.keys():
+            if not ("ingredients" == key or "description" == key or "rating" == key  or "name" == key):
+                print("schema not correct")
+                return False
+    
     
     for i in range(0, len(input['ingredients'])):
         ingredient = input['ingredients'][i]

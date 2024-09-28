@@ -13,30 +13,40 @@ def ingredients():
     res = get_ingredients()
     return render_template("ingredients_list.html", ingredients = res)
 
+@app.route("/ingredients/findone")
+def ingredients_findone_handler():
+    id = "66f8757da668bbd460b57ef0"
+    res = get_ingredient(id)
+    return render_template("ingredients_list.html", ingredients = [res])
+
+
 @app.route("/ingredients/add", methods=["POST"])
 def ingredients_add_handler():
     
-    # name_input = "banana"
+    name_input = "banana"
     quantity_input = 100
     
     ingredient = {
-        # "name": name_input,
+        "name": name_input,
         "quantity": quantity_input
     }
     
     context = add_ingredient(ingredient)
-    
+    print(context)
+    if "error" in context:
+        return jsonify({"message": "Failure", "status_code": 404}) 
+        
     return jsonify({"message": "Success", "status_code": 201}), 201
 
 
 @app.route("/ingredients/delete", methods=["POST"])
 def ingredients_delete_handler():
     
-    id_input = "66f85beaf41a839da5b15945"
+    id_input = "2"
     
-    
-    delete_ingredient(id_input)
-    
+    context = delete_ingredient(id_input)
+    if "error" in context:
+        return jsonify({"message": "Failure", "status_code": 404}) 
     return jsonify({"message": "Success", "status_code": 201}), 201
     
     
@@ -49,15 +59,18 @@ def recipes():
 @app.route("/recipes/add", methods=["POST"])
 def recipes_add_handler():
     
-    # name_input = "banana"
+    name_input = "banana"
     quantity_input = 100
     
     ingredient = {
-        # "name": name_input,
+        "name": name_input,
         "quantity": quantity_input
     }
     
     context = add_ingredient(ingredient)
+    
+    if "error" in context:
+        return jsonify({"message": "Failure", "status_code": 404}) 
     
     return jsonify({"message": "Success", "status_code": 201}), 201
 
@@ -67,8 +80,10 @@ def recipes_delete_handler():
     
     id_input = "66f85beaf41a839da5b15945"
     
+    context = delete_ingredient(id_input)
     
-    delete_ingredient(id_input)
+    if "error" in context:
+        return jsonify({"message": "Failure", "status_code": 404}) 
     
     return jsonify({"message": "Success", "status_code": 201}), 201
     
