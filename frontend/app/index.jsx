@@ -9,7 +9,7 @@ export default function Page() {
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
       <Link href="/RecipeGenerator">
-      <Button label="Recipe Generator"/>
+      <Button label="Recipe Generator" link="../app/RecipeGenerator"/>
       </Link>
     </View>
 

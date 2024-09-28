@@ -1,9 +1,26 @@
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import TextInputExample from '../components/textbox';
+
 export default function Page() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
-        <Button label="Recipe Generator" />
+      <View style={styles.title}>
+        <Text>Recipe Generation</Text>
+        <TextInputExample></TextInputExample>
       </View>
     );
   }
+
+  
+  
+  const styles = StyleSheet.create({
+    title: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'top',
+      padding: 24,
+      fontScale: 24
+    }
+  });
+  

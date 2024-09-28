@@ -1,17 +1,17 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { Link } from 'expo-router';
 
-export default function ButtonToRecipeGenerator({ label }) {
+export default function Button({ label,link }) {
   return (
     <View style={styles.buttonContainer}>
-        <Link href='../app/RecipeGenerator'>
+        <Link href={link}>
       <Pressable style={styles.button}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
       </Link>
     </View>
   );
-}
+}   
 
 const styles = StyleSheet.create({
   buttonContainer: {
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 3,
+    color: '#000',
   },
   button: {
     borderRadius: 10,
@@ -29,9 +30,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    color: '#000'
   },
   buttonIcon: {
     paddingRight: 8,
+    color: '#000'
   },
   buttonLabel: {
     color: '#000',
