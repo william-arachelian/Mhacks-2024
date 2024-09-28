@@ -1,10 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import TextInputExample from '../components/textbox';
 import { ListItem} from 'react-native-elements';
 import { router } from 'expo-router';
-
-import { color } from '@rneui/base';
+import background_image from '../assets/background_image.jpg'; // Adjust the path if necessary
 
 const list = [
   {
@@ -21,6 +20,8 @@ const list = [
 export default function Page() {
 
   return (
+    <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
+
         <View>
         <Text style= {styles.title}> Recipe Generation </Text>
         <TextInputExample>textInput</TextInputExample>
@@ -35,6 +36,7 @@ export default function Page() {
       })
       }
       </View>
+      </ImageBackground>
 
     );
   }
@@ -47,6 +49,9 @@ export default function Page() {
       alignItems: 'center',
       justifyContent: 'center'
 
+    }, 
+    background_image: {
+      flex: 1,
     },
     title: {
       color:"#000",
