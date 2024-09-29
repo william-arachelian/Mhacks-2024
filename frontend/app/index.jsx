@@ -1,6 +1,7 @@
 import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, ScrollView,} from 'react-native'; // Import Text if not included
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RecipeGenerator from './RecipeGenerator'; // Adjust the path if necessary
+import SavedRecipes from './SavedRecipes';
 import background_image from '../assets/background_image.jpg'; // Adjust the path if necessary
 import { useNavigation } from '@react-navigation/native'; 
 import ListWithScroll from './ListWScroll';
@@ -65,6 +66,7 @@ export default function Index() {
     <Tab.Navigator>
         <Tab.Screen name="RecipEasy" component={HomeScreen} />
         <Tab.Screen name="Recipe Generator" component={RecipeGenerator} />
+        <Tab.Screen name="Save Recipes" component={SavedRecipes}/>
     </Tab.Navigator>
   );
 }
