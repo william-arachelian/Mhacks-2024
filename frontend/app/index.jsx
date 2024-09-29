@@ -1,15 +1,12 @@
-import { ImageBackground, StyleSheet, View, Text, TouchableOpacity,} from 'react-native'; // Import Text if not included
+import React from 'react';
+import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, ScrollView,} from 'react-native'; // Import Text if not included
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RecipeGenerator from './RecipeGenerator'; // Adjust the path if necessary
 import background_image from '../assets/background_image.jpg'; // Adjust the path if necessary
-import { TextInput } from 'react-native';
+// import { TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
+import ListWithScroll from './ListWScroll';
 import React, { useState, useEffect } from 'react';
-import Constants from "expo-constants";
-
-const { manifest } = Constants;
-
-
 
 // Create the Tab Navigator
 const Tab = createBottomTabNavigator();
@@ -31,17 +28,16 @@ function HomeScreen() {
 
   return (
     <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
+        <ScrollView>
         <View style={styles.container}>
             <View style={styles.text_box}>
 
                 <Text style={styles.ingredients}>Enter Ingredients:</Text>
                 
             </View>
-            <TextInput 
-                style={styles.input}
-                placeholder='e.g. Eggs 12, Milk 2, Cheese 7, Bacon 4'
-                multiline={true} // placeholder vertical centering 
-            />
+
+            {/* List of Ingredients User Enters */}
+            <ListWithScroll/>
 
             <TouchableOpacity
                 style={styles.button} 
@@ -50,6 +46,7 @@ function HomeScreen() {
                 <Text style={styles.buttonText}>Show me Recipes!</Text> 
             </TouchableOpacity>
         </View>
+        </ScrollView>
     </ImageBackground>
   );
 }
@@ -75,6 +72,7 @@ const styles = StyleSheet.create({
 
   ingredients: {
     fontSize: 18, 
+    fontWeight: 'bold', 
   },
 
   background_image: {
@@ -85,6 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 100,
   },
 
   input: {
