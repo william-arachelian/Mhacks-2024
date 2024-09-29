@@ -24,8 +24,9 @@ def get_ingredients():
         db = get_database()
         ingredientsCollection = db['ingredients']
 
-        res = ingredientsCollection.find()
-        
+        res = list(ingredientsCollection.find())
+        res = list(map(lambda obj : {**obj, "_id": str(obj["_id"])}, res))
+    
         return res
     
     except Exception as e:
@@ -44,7 +45,8 @@ def get_ingredient(id: str):
 
         filter = {"_id": ObjectId(id)}
         res = ingredientsCollection.find_one(filter)
-
+        
+        res = {**res, "_id": str(res["_id"])}
         if res:
             return res
         else:
@@ -112,7 +114,9 @@ def get_recipes():
         db = get_database()
         recipesCollection = db['recipes']
 
-        res = recipesCollection.find()
+        res = list(recipesCollection.find())
+        res = list(map(lambda obj : {**obj, "_id":str(obj["_id"])}, res))
+
         return res
     
     except Exception as e:
@@ -131,8 +135,9 @@ def get_recipe(id: str):
 
         filter = {"_id": ObjectId(id)}
         res = ingredientsCollection.find_one(filter)
-
+        
         if res:
+            res = {**res, "_id": str(res["_id"])}
             return res
         else:
             raise ValueError(f"recipe with id {id} not found")
