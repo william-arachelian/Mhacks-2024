@@ -1,29 +1,26 @@
-import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, ScrollView,} from 'react-native'; // Import Text if not included
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import RecipeGenerator from './RecipeGenerator'; // Adjust the path if necessary
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native"; // Import Text if not included
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import RecipeGenerator from "./RecipeGenerator"; // Adjust the path if necessary
+import background_image from "../assets/background_image.jpg"; // Adjust the path if necessary
+// import { TextInput } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+import ListWithScroll from "./ListWScroll";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import SavedRecipes from './SavedRecipes';
-import background_image from '../assets/background_image.jpg'; // Adjust the path if necessary
-import { useNavigation } from '@react-navigation/native'; 
-import ListWithScroll from './ListWScroll';
-import React, { useState, useEffect } from 'react';
 
 // Create the Tab Navigator
 const Tab = createBottomTabNavigator();
 // Define HomeScreen component within index.jsx
 function HomeScreen() {
   const navigation = useNavigation(); // Access navigation object
-  
-  const [data, setData] = useState([])
-  useEffect(() => {
-    fetch("http://localhost:5000/ingredients").then(
-      res => res.json()
-    ).then(
-      data=> {
-        setData(data);
-        console.log(data);
-      }
-    )
-  }, [])
 
   return (
     <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
@@ -105,6 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 35, 
     fontWeight: 'bold', 
     textDecorationLine: 'underline',
+
   },
 
   background_image: {
@@ -113,32 +111,32 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingTop: 100,
     paddingBottom: 200,
   },
 
   input: {
     borderWidth: 1,
-    borderColor: '#777',
-    backgroundColor: '#fff',
+    borderColor: "#777",
+    backgroundColor: "#fff",
     padding: 8,
     margin: 10,
     height: 100,
     width: 250,
-    fontSize: 18,   
+    fontSize: 18,
   },
 
   button: {
-    backgroundColor: '#f5f5dc',
+    backgroundColor: "#f5f5dc",
     padding: 12,
     borderRadius: 15,
     marginBottom: 40,
   },
 
   buttonText: {
-    fontSize: 20,   
-    fontWeight: 'bold', 
-  }
+    fontSize: 20,
+    fontWeight: "bold",
+  },
 });

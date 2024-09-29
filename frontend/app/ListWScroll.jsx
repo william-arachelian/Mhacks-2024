@@ -1,78 +1,107 @@
-import React, { useState } from "react";
-import { TextInput, View, StyleSheet, Button, Text, TouchableOpacity} from "react-native";
-
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  Button,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
 const ListWithScroll = () => {
+  const [listValue, setListValue] = useState("");
+  const [list, setList] = useState([]);
+  const [markedForDeletion, setMarkedForDeletion] = useState(null); // Track the item marked for deletion
 
-    const [listValue, setListValue] = useState('');
-    const [list, setList] = useState([]);
-    const [markedForDeletion, setMarkedForDeletion] = useState(null); // Track the item marked for deletion
+  useEffect(() => {
+    axios.get("http://35.3.86.167:5000/ingredients").then((response) => {
+      data = response.data;
+      //   console.log(data);
+      setList([...response.data["ingredients"]]);
+    });
+  }, []);
 
-    
-    const handlePress = () => {
-        if (listValue.trim()) {
-            setList([...list, listValue]);
-            setListValue('');
-            setMarkedForDeletion(null); // Reset deletion marker
-        }
-    };
+  const handlePress = () => {
+    if (listValue.trim()) {
+      setList([...list, listValue]);
 
-    const handleMarkForDeletion = (index) => {
-        if (markedForDeletion === index) {
-            // If already marked, unmark
-            setMarkedForDeletion(null);
-        } else {
-            // Mark the item for deletion
-            setMarkedForDeletion(index);
-        }
-    };
+      axios
+        .post("http://35.3.86.167:5000/ingredients/add", { name: listValue })
+        .then((response) => {
+          setList([...list, response.data["output"]]);
+        });
+      setListValue("");
+      setMarkedForDeletion(null); // Reset deletion marker
+    }
+  };
 
-    const handleDelete = (index) => {
-        const newList = list.filter((_, i) => i !== index);
-        setList(newList);
-    };
+  const handleMarkForDeletion = (index) => {
+    if (markedForDeletion === index) {
+      // If already marked, unmark
 
-    return <View style={styles.container}>
-        <TextInput 
-            style={styles.input}
-            placeholder='e.g. Eggs, Milk, Cheese, Bacon'
-            multiline={true} // placeholder vertical centering 
-            value={listValue} // Bind the state value to the TextInput
-            onChangeText={(newValue) => setListValue(newValue)}
-        />
+      setMarkedForDeletion(null);
+    } else {
+      // Mark the item for deletion
+      setMarkedForDeletion(index);
+    }
+  };
 
-        <View style={styles.button}>
-            <Button title = "Add List Item" color = "green" onPress={handlePress}/>
-        </View>
+  const handleDelete = (index) => {
+    axios
+      .delete(
+        `http://35.3.86.167:5000/ingredients/delete/${list[index]["_id"]}`
+      )
+      .then((response) => {
+        console.log(response);
+      });
+    const newList = list.filter((_, i) => i !== index);
 
-        <View>
-            {[...list].reverse().map((item, index) => {
-                const originalIndex = list.length - 1 - index;
-                return (
-                    <TouchableOpacity
-                        key={originalIndex}
-                        style={styles.itemContainer}
-                        onPress={() => handleMarkForDeletion(originalIndex)}
-                    >
-                        <View style={styles.listItem}>
-                            <Text style={styles.itemText}>
-                                {list.length - index}. {item}
-                            </Text>
-                            {markedForDeletion === originalIndex && (
-                                <TouchableOpacity
-                                    style={styles.deleteButton}
-                                    onPress={() => handleDelete(originalIndex)}
-                                >
-                                    <Text style={styles.deleteButtonText}>X</Text>
-                                </TouchableOpacity>
-                            )}
-                        </View>
-                    </TouchableOpacity>
-                );
-            })}
-        </View>
-    </View>;
+    setList(newList);
+  };
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="e.g. Eggs, Milk, Cheese, Bacon"
+        multiline={true} // placeholder vertical centering
+        value={listValue} // Bind the state value to the TextInput
+        onChangeText={(newValue) => setListValue(newValue)}
+      />
+
+      <View style={styles.button}>
+        <Button title="Add List Item" color="green" onPress={handlePress} />
+      </View>
+
+      <View>
+        {[...list].reverse().map((item, index) => {
+          const originalIndex = list.length - 1 - index;
+          return (
+            <TouchableOpacity
+              key={originalIndex}
+              style={styles.itemContainer}
+              onPress={() => handleMarkForDeletion(originalIndex)}
+            >
+              <View style={styles.listItem}>
+                <Text style={styles.itemText}>
+                  {list.length - index}. {item["name"]}
+                </Text>
+                {markedForDeletion === originalIndex && (
+                  <TouchableOpacity
+                    style={styles.deleteButton}
+                    onPress={() => handleDelete(originalIndex)}
+                  >
+                    <Text style={styles.deleteButtonText}>X</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </View>
+  );
 };
 
 export default ListWithScroll;
@@ -134,5 +163,5 @@ const styles =StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
     },
-
 });
+

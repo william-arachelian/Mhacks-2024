@@ -1,40 +1,45 @@
-import { Image,TouchableHighlight, ImageBackground, StyleSheet, Text, View, } from 'react-native';
-import React, { useState } from 'react';
-import { ListItem} from 'react-native-elements';
-import { router } from 'expo-router';
-import background_image from '../assets/background_image.jpg'; // Adjust the path if necessary
-import * as SplashScreen from 'expo-splash-screen';
-import { ScrollView } from 'react-native';
+
+import {
+  Image,
+  TouchableHighlight,
+  ActivityIndicator,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { ListItem } from "react-native-elements";
+import { router } from "expo-router";
+import background_image from "../assets/background_image.jpg"; // Adjust the path if necessary
+import * as SplashScreen from "expo-splash-screen";
+import axios from "axios";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function Page() {
-  const [list, setList] = useState(([{
-    name: 'Garlic Shrimp Mac and Cheese',
-  },
-  {
-    name: 'sandwich'
-  },
-  {
-    name: 'foods'
-  },
 
-]))
+  const [ingredients, setIngredients] = useState([]);
+  // const [recipes, setRecipes] = useState([]);
+  const [list, setList] = useState([]);
 
+  useEffect(() => {
+    axios.get("http://35.3.86.167:5000/ingredients").then((response) => {
+      setIngredients([...response.data["ingredients"]]);
+    });
+    axios.get("http://35.3.86.167:5000/recipes/generate").then((response) => {
+      setList([...response.data["recipes"]]);
+    });
+  }, [list]);
   const [appIsReady, setAppIsReady] = React.useState(false);
   React.useEffect(() => {
-    setAppIsReady()
     async function prepare() {
-      try {
-        // Artificially delay for two seconds to simulate a slow loading
-        // experience. Please remove this if you copy and paste the code!
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        // Tell the application to render
+      setAppIsReady(false)
+      axios.get("http://35.3.86.167:5000/recipes/generate").then((response) => {
+        setList([...response.data["recipes"]]);
         setAppIsReady(true);
-      }
+      });
     }
 
     prepare();
@@ -52,8 +57,8 @@ export default function Page() {
   }, [appIsReady]);
 
   if (!appIsReady) {
-    return(
-      <View style= {styles.waiting}>
+    return (
+      <View style={styles.waiting}>
         <Text>cooking your food</Text>
         <Image source={require('../assets/foodloading.gif')} style={{ width: 200, height: 200 }} />
         </View>
@@ -87,6 +92,50 @@ export default function Page() {
     );
   }
 
+  return (
+    <ImageBackground
+      source={background_image}
+      resizeMode="cover"
+      style={styles.background_image}
+    >
+      <View onLayout={onLayoutRootView}>
+        <Text style={styles.title}> Recipe List </Text>
+        {list.map((item, i) => {
+          return (
+            <ListItem
+              button
+              onPress={() => router.navigate("../recipe")}
+              key={i}
+              bottomDivider
+            >
+              <ListItem.Content style={styles.textBox}>
+                <ListItem.Title> {item.name}</ListItem.Title>
+              </ListItem.Content>
+              <ListItem.Chevron />
+            </ListItem>
+          );
+        })}
+      </View>
+    </ImageBackground>
+  );
+}
+
+const styles = StyleSheet.create({
+  all: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  background_image: {
+    flex: 1,
+  },
+  title: {
+    color: "#000",
+    textAlign: "center",
+    fontSize: 24,
+    padding: 24,
+    backgroundColor: "#dddddd",
+  },
 
   const styles = StyleSheet.create({
     all:

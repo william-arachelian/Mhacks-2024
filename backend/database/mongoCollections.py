@@ -14,7 +14,7 @@ from bson.json_util import dumps, loads
 # recipes {
 #     name: str
 #     ingredients[]: arr[Obj]
-#     description: str
+#     instructions[]: arr[str]
 #     rating(?): int
 # }
 
@@ -24,9 +24,10 @@ def get_ingredients():
         db = get_database()
         ingredientsCollection = db['ingredients']
 
-        res = ingredientsCollection.find()
-        
-        return dumps(list(res))
+        res = list(ingredientsCollection.find())
+        res = list(map(lambda obj : {**obj, "_id": str(obj["_id"])}, res))
+    
+        return res
     
     except Exception as e:
         print(e)
@@ -44,7 +45,8 @@ def get_ingredient(id: str):
 
         filter = {"_id": ObjectId(id)}
         res = ingredientsCollection.find_one(filter)
-
+        
+        res = {**res, "_id": str(res["_id"])}
         if res:
             return res
         else:
@@ -73,10 +75,11 @@ def add_ingredient(input:dict):
 
         res = ingredientsCollection.insert_one(ingredientObj)
         if res:
-            ingredientObj["id"] = res.inserted_id
+            ingredientObj["_id"] = str(res.inserted_id)
+            return ingredientObj
         else:
             raise ValueError("Insertion Failed")
-        return ingredientObj
+        
         
     except Exception as e:
         print(e)
@@ -112,7 +115,9 @@ def get_recipes():
         db = get_database()
         recipesCollection = db['recipes']
 
-        res = recipesCollection.find()
+        res = list(recipesCollection.find())
+        res = list(map(lambda obj : {**obj, "_id":str(obj["_id"])}, res))
+
         return res
     
     except Exception as e:
@@ -131,8 +136,9 @@ def get_recipe(id: str):
 
         filter = {"_id": ObjectId(id)}
         res = ingredientsCollection.find_one(filter)
-
+        
         if res:
+            res = {**res, "_id": str(res["_id"])}
             return res
         else:
             raise ValueError(f"recipe with id {id} not found")
@@ -151,7 +157,7 @@ def add_recipe(input: dict):
         
         recipeObj = {
             "name": input['name'],
-            "description": input['description'],
+            "instructions": input['instructions'],
             "rating": input['rating'] if input.get('rating') != None else -1,
             "ingredients": input['ingredients']
         }
@@ -180,7 +186,7 @@ def delete_recipe(id: str):
             raise ValueError('invalid id string')
         
         db = get_database()
-        recipesCollection = db['recipe']
+        recipesCollection = db['recipes']
 
         filter={"_id": ObjectId(id)}
         res = recipesCollection.delete_one(filter)
