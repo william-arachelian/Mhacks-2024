@@ -84,10 +84,15 @@ The development of RecipeGenerator involves a combination of frontend, backend, 
 ## How To Run
 
 ### Backend
-- create an environment or run source env/bin/activate
-- Python version 3.10.12
+- create an environment for python (version 3.10.12)
 - run pip install -r requirements.txt
-- 
+- run python app.py
+
+### Frontend
+- run npm install
+- run npm start
+- install expo go on Android or IOS
+- scan the QR code
 
 
 ## Contributing
