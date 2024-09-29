@@ -1,5 +1,8 @@
 from flask import Flask, render_template, jsonify
 from database.mongoCollections import *
+from llm.recipeGenerator import generate_recipes_langGroq
+
+
 from datetime import date
 app = Flask(__name__)
 db = get_database
@@ -87,3 +90,10 @@ def recipes_delete_handler():
     
     return jsonify({"message": "Success", "status_code": 201}), 201
     
+
+@app.route("/recipes/generate")
+def recipes_generate_handler():
+
+    recipes = generate_recipes_langGroq()
+
+    return recipes
