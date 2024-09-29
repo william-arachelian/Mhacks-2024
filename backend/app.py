@@ -4,6 +4,8 @@ from datetime import date
 app = Flask(__name__)
 db = get_database
 
+
+
 @app.route("/")
 def get_index():
     return render_template("ingredients_list.html")
@@ -11,7 +13,7 @@ def get_index():
 @app.route("/ingredients")
 def ingredients():
     res = get_ingredients()
-    return jsonify(res)
+    return res
 
 @app.route("/ingredients/findone")
 def ingredients_findone_handler():

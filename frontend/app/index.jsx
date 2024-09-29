@@ -1,52 +1,49 @@
-import React from 'react';
-import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, ScrollView,} from 'react-native'; // Import Text if not included
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import RecipeGenerator from './RecipeGenerator'; // Adjust the path if necessary
-import background_image from '../assets/background_image.jpg'; // Adjust the path if necessary
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native"; // Import Text if not included
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import RecipeGenerator from "./RecipeGenerator"; // Adjust the path if necessary
+import background_image from "../assets/background_image.jpg"; // Adjust the path if necessary
 // import { TextInput } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; 
-import ListWithScroll from './ListWScroll';
-import React, { useState, useEffect } from 'react';
+import { useNavigation } from "@react-navigation/native";
+import ListWithScroll from "./ListWScroll";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 // Create the Tab Navigator
 const Tab = createBottomTabNavigator();
 // Define HomeScreen component within index.jsx
 function HomeScreen() {
   const navigation = useNavigation(); // Access navigation object
-  
-  const [data, setData] = useState([])
-  useEffect(() => {
-    fetch("http://localhost:5000/ingredients").then(
-      res => res.json()
-    ).then(
-      data=> {
-        setData(data);
-        console.log(data);
-      }
-    )
-  }, [])
 
   return (
-    <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
-        <ScrollView>
+    <ImageBackground
+      source={background_image}
+      resizeMode="cover"
+      style={styles.background_image}
+    >
+      <ScrollView>
         <View style={styles.container}>
-            <View style={styles.text_box}>
+          <View style={styles.text_box}>
+            <Text style={styles.ingredients}>Enter Ingredients:</Text>
+          </View>
 
-                <Text style={styles.ingredients}>Enter Ingredients:</Text>
-                
-            </View>
+          {/* List of Ingredients User Enters */}
+          <ListWithScroll />
 
-            {/* List of Ingredients User Enters */}
-            <ListWithScroll/>
-
-            <TouchableOpacity
-                style={styles.button} 
-                onPress={() => navigation.navigate('Recipe Generator')}  // Navigate to RecipeGenerator screen
-            >
-                <Text style={styles.buttonText}>Show me Recipes!</Text> 
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Recipe Generator")} // Navigate to RecipeGenerator screen
+          >
+            <Text style={styles.buttonText}>Show me Recipes!</Text>
+          </TouchableOpacity>
         </View>
-        </ScrollView>
+      </ScrollView>
     </ImageBackground>
   );
 }
@@ -55,24 +52,24 @@ function HomeScreen() {
 export default function Index() {
   return (
     <Tab.Navigator>
-        <Tab.Screen name="RecipEasy" component={HomeScreen} />
-        <Tab.Screen name="Recipe Generator" component={RecipeGenerator} />
+      <Tab.Screen name="RecipEasy" component={HomeScreen} />
+      <Tab.Screen name="Recipe Generator" component={RecipeGenerator} />
     </Tab.Navigator>
   );
 }
 
 const styles = StyleSheet.create({
   text_box: {
-    borderColor: '#777',
-    backgroundColor: '#f5f5dc',
+    borderColor: "#777",
+    backgroundColor: "#f5f5dc",
     padding: 8,
     margin: 10,
     borderRadius: 15,
   },
 
   ingredients: {
-    fontSize: 18, 
-    fontWeight: 'bold', 
+    fontSize: 18,
+    fontWeight: "bold",
   },
 
   background_image: {
@@ -81,30 +78,30 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingTop: 100,
   },
 
   input: {
     borderWidth: 1,
-    borderColor: '#777',
-    backgroundColor: '#fff',
+    borderColor: "#777",
+    backgroundColor: "#fff",
     padding: 8,
     margin: 10,
     height: 100,
     width: 250,
-    fontSize: 18,   
+    fontSize: 18,
   },
 
   button: {
-    backgroundColor: '#f5f5dc',
+    backgroundColor: "#f5f5dc",
     padding: 12,
     borderRadius: 15,
   },
 
   buttonText: {
-    fontSize: 20,   
-    fontWeight: 'bold', 
-  }
+    fontSize: 20,
+    fontWeight: "bold",
+  },
 });
