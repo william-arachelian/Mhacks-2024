@@ -106,62 +106,61 @@ const ListWithScroll = () => {
 
 export default ListWithScroll;
 
-const styles =StyleSheet.create({
-    container: {
-        justifyContent: 'center', // Center vertically
-        alignItems: 'center', // Center horizontally
-        padding: 10,
-    },
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center", // Center vertically
+    alignItems: "center", // Center horizontally
+    padding: 10,
+  },
 
-    input: {
-        borderWidth: 1,
-        borderColor: '#777',
-        backgroundColor: '#fff',
-        padding: 8,
-        margin: 10,
-        height: 45,
-        width: 300,
-        fontSize: 18,  
-        borderRadius: 15,
-    },
+  input: {
+    borderWidth: 1,
+    borderColor: "#777",
+    backgroundColor: "#fff",
+    padding: 8,
+    margin: 10,
+    height: 45,
+    width: 300,
+    fontSize: 18,
+    borderRadius: 15,
+  },
 
-    button: {
-        padding: 1,
-        marginTop: 10,
-        marginBottom: 10,
-        width: 300,
-        backgroundColor: 'pink',
-        borderRadius: 15,
-    },
+  button: {
+    padding: 1,
+    marginTop: 10,
+    marginBottom: 10,
+    width: 300,
+    backgroundColor: "pink",
+    borderRadius: 15,
+  },
 
-    listItem: {
-        backgroundColor: "pink",
-        marginLeft: 10,
-        marginTop: 3,
-        padding: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between', // Space between item text and delete button
-        padding: 10,
-        width: 250, // Adjust width as needed
-        borderRadius: 5,
-    },  
+  listItem: {
+    backgroundColor: "pink",
+    marginLeft: 10,
+    marginTop: 3,
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between", // Space between item text and delete button
+    padding: 10,
+    width: 250, // Adjust width as needed
+    borderRadius: 5,
+  },
 
-    itemContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginVertical: 5,
-    },
-    deleteButton: {
-        backgroundColor: 'red',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        borderRadius: 5,
-        marginLeft: 10, // Added margin to move the button to the right
-    },
-    deleteButtonText: {
-        color: '#fff',
-        fontWeight: 'bold',
-    },
+  itemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 5,
+  },
+  deleteButton: {
+    backgroundColor: "red",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+    marginLeft: 10, // Added margin to move the button to the right
+  },
+  deleteButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
 });
-

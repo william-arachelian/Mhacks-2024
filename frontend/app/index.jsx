@@ -14,12 +14,13 @@ import { useNavigation } from "@react-navigation/native";
 import ListWithScroll from "./ListWScroll";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Recipe from "./recipe"
 import SavedRecipes from './SavedRecipes';
 
 // Create the Tab Navigator
 const Tab = createBottomTabNavigator();
 // Define HomeScreen component within index.jsx
-function HomeScreen() {
+function HomeScreen(props) {
   const navigation = useNavigation(); // Access navigation object
 
   return (
@@ -37,7 +38,7 @@ function HomeScreen() {
                 <TouchableOpacity
                     style={styles.button} 
                     onPress={() => {
-                      
+                      props.setButtonClick(true)
                       navigation.navigate('Recipe Generator')
                     }}  // Navigate to RecipeGenerator screen
                 >
@@ -62,10 +63,11 @@ function HomeScreen() {
 
 //Navigation Bar
 export default function Index() {
+  const [buttonClick, setButtonClick] = React.useState(false);
   return (
     <Tab.Navigator>
-        <Tab.Screen name="RecipEasy" component={HomeScreen} />
-        <Tab.Screen name="Recipe Generator" component={RecipeGenerator} />
+        <Tab.Screen name="RecipEasy" children={() => <HomeScreen buttonClick={buttonClick} setButtonClick={setButtonClick}></HomeScreen>} />
+        <Tab.Screen name="Recipe Generator" children={() => <RecipeGenerator buttonClick={buttonClick} setButtonClick={setButtonClick}></RecipeGenerator>} />
         <Tab.Screen name="Save Recipes" component={SavedRecipes}/>
     </Tab.Navigator>
   );

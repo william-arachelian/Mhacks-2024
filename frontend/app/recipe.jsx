@@ -1,10 +1,13 @@
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
-export default function Page() {
-
-  const BackButton = () => {  
+export default function Page( props ) {
+  console.log()
+  const BackButton = () => {
     return (
-      <TouchableOpacity style={styles.button} onPress={() => router.replace('/')}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.replace("/")}
+      >
         <Text style={styles.text}>Back</Text>
       </TouchableOpacity>
     );

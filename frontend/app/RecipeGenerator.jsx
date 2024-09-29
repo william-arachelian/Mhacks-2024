@@ -12,32 +12,46 @@ import {
 import React, { useEffect, useState } from "react";
 import { ListItem } from "react-native-elements";
 import { router } from "expo-router";
+import Recipe from "../app/recipe" 
+import { useNavigation } from "expo-router";
 import background_image from "../assets/background_image.jpg"; // Adjust the path if necessary
 import * as SplashScreen from "expo-splash-screen";
 import axios from "axios";
+import { useIsFocused } from "@react-navigation/native";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function Page() {
-
+export default function Page(props) {
+  
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
   const [ingredients, setIngredients] = useState([]);
   // const [recipes, setRecipes] = useState([]);
   const [list, setList] = useState([]);
 
   const [appIsReady, setAppIsReady] = React.useState(false);
+
+  // useEffect(() => {
+  //   setAppIsReady(false);
+  //   axios.get("http://35.3.86.167:5000/ingredients").then((response) => {
+  //     setIngredients([...response.data["ingredients"]]);
+  //   });
+  // }, [])
   useEffect(() => {
-    setAppIsReady(false);
-    axios.get("http://35.3.86.167:5000/ingredients").then((response) => {
-      setIngredients([...response.data["ingredients"]]);
-    });
-  }, [])
-  useEffect(() => {
-    
+    console.log(props );
+    if (isFocused == true && props.buttonClick) {
+      props.setButtonClick(false);
+      setAppIsReady(false);
+      
+      axios.get("http://35.3.86.167:5000/ingredients").then((response) => {
+        setIngredients([...response.data["ingredients"]]);
+      });
       axios.get("http://35.3.86.167:5000/recipes/generate").then((response) => {
         setList([...response.data["recipes"]]);
         setAppIsReady(true);
-      });
-  }, [ingredients]);
+    });
+    }
+  }, [isFocused]);
 
   const onLayoutRootView = React.useCallback(async () => {
     if (appIsReady) {
@@ -69,8 +83,9 @@ export default function Page() {
         {
 
         list.map((item, i) => {
+          console.log(item)
           return (
-          <TouchableHighlight onPress={() => router.replace("recipe")}>
+          <TouchableHighlight key={i} onPress={() => navigation.navigate({name: "recipe", params: {name: item.name}})}>
             <View style={styles.textboxName}>
             <Text>{item.name}</Text>
             </View>
