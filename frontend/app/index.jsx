@@ -63,7 +63,7 @@ function HomeScreen(props) {
 
 //Navigation Bar
 export default function Index() {
-  const [buttonClick, setButtonClick] = React.useState(false);
+  const [buttonClick, setButtonClick] = React.useState(true);
   return (
     <Tab.Navigator>
         <Tab.Screen name="RecipEasy" children={() => <HomeScreen buttonClick={buttonClick} setButtonClick={setButtonClick}></HomeScreen>} />

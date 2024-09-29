@@ -6,14 +6,14 @@ import {
   FlatList,
   Button,
 } from "react-native";
-import { router} from "expo-router";
+import Index from ".";
+import { router, useNavigation } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
-import { useNavigation } from "@react-navigation/native";
-
 import axios from "axios";
 export default function Page(props) {
-  const { name, ingredients, instructions, rating } = useLocalSearchParams();
-const navigation = useNavigation()
+  const { _id, name, ingredients, instructions, rating } =
+    useLocalSearchParams();
+
   // ingredients_list = (ingredients.split(","));
   // instructions_list = instructions.split(",");
   const BackButton = () => {
@@ -64,16 +64,10 @@ const navigation = useNavigation()
 
         <Button
           onPress={() => {
-            const recipeObj = {
-              name: name,
-              ingredients: ingredients,
-              instructions: instructions,
-            };
-
-            axios.post("http://35.3.86.167:5000/recipes/add", recipeObj);
-            navigation.navigate("SavedRecipes");
+            axios.delete(`http://35.3.86.167:5000/recipes/delete/${_id}`);
+            router.push("/");
           }}
-          title="Save Recipe"
+          title="Remove Recipe"
           color="#841584"
         />
       </View>
