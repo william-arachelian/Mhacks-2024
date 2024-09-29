@@ -93,14 +93,16 @@ const styles =StyleSheet.create({
         height: 45,
         width: 300,
         fontSize: 18,  
+        borderRadius: 15,
     },
 
     button: {
         padding: 1,
-        marginTop: 5,
+        marginTop: 10,
         marginBottom: 10,
         width: 300,
-        backgroundColor: '#fff',
+        backgroundColor: 'pink',
+        borderRadius: 15,
     },
 
     listItem: {

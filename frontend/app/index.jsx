@@ -3,36 +3,60 @@ import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, ScrollView,}
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RecipeGenerator from './RecipeGenerator'; // Adjust the path if necessary
 import background_image from '../assets/background_image.jpg'; // Adjust the path if necessary
-// import { TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
 import ListWithScroll from './ListWScroll';
+import React, { useState, useEffect } from 'react';
 
 // Create the Tab Navigator
 const Tab = createBottomTabNavigator();
-
 // Define HomeScreen component within index.jsx
 function HomeScreen() {
   const navigation = useNavigation(); // Access navigation object
   
+  const [data, setData] = useState([])
+  useEffect(() => {
+    fetch("http://localhost:5000/ingredients").then(
+      res => res.json()
+    ).then(
+      data=> {
+        setData(data);
+        console.log(data);
+      }
+    )
+  }, [])
+
   return (
     <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
-        <View style={styles.container}>
-        <ScrollView>
-            <View style={styles.text_box}>
-                <Text style={styles.ingredients}>Enter Ingredients:</Text>
+
+<frontend_touchups
+        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+            <View style={styles.container}>
+                <View style={styles.text_box}>
+                    <Text style={styles.ingredients}>Enter Ingredients:</Text>
+                </View>
+
+                {/* List of Ingredients User Enters */}
+                <ListWithScroll/>
+
+                <TouchableOpacity
+                    style={styles.button} 
+                    onPress={() => navigation.navigate('Recipe Generator')}  // Navigate to RecipeGenerator screen
+                >
+                    <Text style={styles.buttonText}>Show me Recipes!</Text> 
+                </TouchableOpacity>
+
+
+                <View style={styles.intro}>
+                    <Text style={styles.introText}>
+                        RecipEasy suggests delicious recipes based on the ingredients you have. 
+                        Using AI, it tailors personalized recipes to your available ingredients. 
+                        Whether planning a grocery list or seeking inspiration, RecipeGenerator has you covered!
+                    </Text>
+                </View>
+
+
             </View>
-
-            {/* List of Ingredients User Enters */}
-            <ListWithScroll/>
-
-            <TouchableOpacity
-                style={styles.button} 
-                  // Navigate to RecipeGenerator screen
-            >
-                <Text style={styles.buttonText}>Show me Recipes!</Text> 
-            </TouchableOpacity>
-        </ScrollView>      
-        </View>
+        </ScrollView>
     </ImageBackground>
   );
 }
@@ -48,17 +72,39 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
+ 
+  intro: {
+    padding: 20,                
+    marginBottom: 40,               
+    textAlign: 'center',            
+    color: '#333',           
+    fontSize: 30,                   
+    lineHeight: 34,                
+    backgroundColor: '#f5f5dc',       
+    borderRadius: 15,  
+    fontWeight: 'bold',                
+    
+  },  
+
+  introText: {
+    color: '#333',
+    fontSize: 20,
+    fontFamily: 'Georgia', // Change to a different font family
+    
+  },
+
   text_box: {
     borderColor: '#777',
     backgroundColor: '#f5f5dc',
-    padding: 8,
+    padding: 12,
     margin: 10,
     borderRadius: 15,
   },
 
   ingredients: {
-    fontSize: 18, 
+    fontSize: 35, 
     fontWeight: 'bold', 
+    textDecorationLine: 'underline',
   },
 
   background_image: {
@@ -70,6 +116,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 100,
+    paddingBottom: 200,
   },
 
   input: {
@@ -87,6 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5dc',
     padding: 12,
     borderRadius: 15,
+    marginBottom: 40,
   },
 
   buttonText: {
