@@ -75,10 +75,11 @@ def add_ingredient(input:dict):
 
         res = ingredientsCollection.insert_one(ingredientObj)
         if res:
-            ingredientObj["id"] = res.inserted_id
+            ingredientObj["_id"] = str(res.inserted_id)
+            return ingredientObj
         else:
             raise ValueError("Insertion Failed")
-        return ingredientObj
+        
         
     except Exception as e:
         print(e)

@@ -1,6 +1,8 @@
 from groq import Groq
 import ast
 from langchain_groq import ChatGroq
+from database.mongoCollections import get_ingredients
+
 
 def generate_recipe_groq():
 #get ingredients list from backend
@@ -70,7 +72,10 @@ def generate_recipe_groq():
 
     return recipes
 
-def generate_recipes_langGroq(ingredients_list=[]):
+def generate_recipes_langGroq():
+    
+    ingredients_list = get_ingredients()
+    
     ingredients_list = [ingredient['name'] for ingredient in ingredients_list]
 
     ingredients_toString = ", ".join(ingredients_list)

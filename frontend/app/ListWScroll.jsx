@@ -16,7 +16,9 @@ const ListWithScroll = () => {
 
   useEffect(() => {
     axios.get("http://35.3.86.167:5000/ingredients").then((response) => {
-      setList([...response.data]);
+      data = response.data;
+      //   console.log(data);
+      setList([...response.data["ingredients"]]);
     });
   }, []);
 
@@ -27,7 +29,7 @@ const ListWithScroll = () => {
       axios
         .post("http://35.3.86.167:5000/ingredients/add", { name: listValue })
         .then((response) => {
-          console.log(response);
+          setList([...list, response.data["output"]]);
         });
       setListValue("");
       setMarkedForDeletion(null); // Reset deletion marker
@@ -37,6 +39,7 @@ const ListWithScroll = () => {
   const handleMarkForDeletion = (index) => {
     if (markedForDeletion === index) {
       // If already marked, unmark
+
       setMarkedForDeletion(null);
     } else {
       // Mark the item for deletion
@@ -45,7 +48,15 @@ const ListWithScroll = () => {
   };
 
   const handleDelete = (index) => {
+    axios
+      .delete(
+        `http://35.3.86.167:5000/ingredients/delete/${list[index]["_id"]}`
+      )
+      .then((response) => {
+        console.log(response);
+      });
     const newList = list.filter((_, i) => i !== index);
+
     setList(newList);
   };
 
@@ -74,7 +85,7 @@ const ListWithScroll = () => {
             >
               <View style={styles.listItem}>
                 <Text style={styles.itemText}>
-                  {list.length - index}. {item}
+                  {list.length - index}. {item["name"]}
                 </Text>
                 {markedForDeletion === originalIndex && (
                   <TouchableOpacity

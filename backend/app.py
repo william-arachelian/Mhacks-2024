@@ -20,10 +20,11 @@ def ingredients_findone_handler(ingredient_id):
 
 @app.route("/ingredients/add", methods=["POST"])
 def ingredients_add_handler():
+    data = request.get_json()
     
     ingredient = {
-        "name": request.form['name'],
-        "quantity": request.form['quantity'] if request.form.get('quantiy') else None
+        "name": data['name'],
+        "quantity": data['quantity'] if data.get('quantiy') else None
     }
     
     context = add_ingredient(ingredient)
@@ -32,7 +33,7 @@ def ingredients_add_handler():
     if "error" in context:
         return jsonify({"message": "Failure", "status_code": 404}) 
         
-    return jsonify({"message": "Success", "status_code": 201}), 201
+    return jsonify({"message": "Success", "status_code": 201, "output": context}), 201
 
 
 @app.route("/ingredients/delete/<string:ingredient_id>", methods=["DELETE"])
@@ -71,7 +72,7 @@ def recipes_add_handler():
     if "error" in context:
         return jsonify({"message": "Failure", "status_code": 404}) 
     
-    return jsonify({"message": "Success", "status_code": 201}), 201
+    return jsonify({"message": "Success", "status_code": 201, "output": recipe}), 201
 
 
 @app.route("/recipes/delete/<string:recipe_id>", methods=["DELETE"])
@@ -91,3 +92,6 @@ def recipes_generate_handler():
     res = generate_recipes_langGroq()
 
     return {"recipes": res}
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
