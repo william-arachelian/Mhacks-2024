@@ -36,7 +36,10 @@ function HomeScreen() {
 
                 <TouchableOpacity
                     style={styles.button} 
-                    onPress={() => navigation.navigate('Recipe Generator')}  // Navigate to RecipeGenerator screen
+                    onPress={() => {
+                      
+                      navigation.navigate('Recipe Generator')
+                    }}  // Navigate to RecipeGenerator screen
                 >
                     <Text style={styles.buttonText}>Show me Recipes!</Text> 
                 </TouchableOpacity>
