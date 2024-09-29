@@ -5,16 +5,29 @@ import RecipeGenerator from './RecipeGenerator'; // Adjust the path if necessary
 import background_image from '../assets/background_image.jpg'; // Adjust the path if necessary
 import { useNavigation } from '@react-navigation/native'; 
 import ListWithScroll from './ListWScroll';
+import React, { useState, useEffect } from 'react';
 
 // Create the Tab Navigator
 const Tab = createBottomTabNavigator();
-
 // Define HomeScreen component within index.jsx
 function HomeScreen() {
   const navigation = useNavigation(); // Access navigation object
   
+  const [data, setData] = useState([])
+  useEffect(() => {
+    fetch("http://localhost:5000/ingredients").then(
+      res => res.json()
+    ).then(
+      data=> {
+        setData(data);
+        console.log(data);
+      }
+    )
+  }, [])
+
   return (
     <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
+<frontend_touchups
         <ScrollView contentContainerStyle={styles.scrollViewContainer}>
             <View style={styles.container}>
                 <View style={styles.text_box}>
@@ -30,6 +43,7 @@ function HomeScreen() {
                 >
                     <Text style={styles.buttonText}>Show me Recipes!</Text> 
                 </TouchableOpacity>
+
 
                 <View style={styles.intro}>
                     <Text style={styles.introText}>

@@ -1,4 +1,4 @@
-#!/home/sushi/mhacks-2024/Mhacks-2024/backend/env/bin/python3
+#!/home/sushi/mhacks-2024/Mhacks-2024/backend/env/bin/python3.10
 # -*- coding: utf-8 -*-
 import re
 import sys
