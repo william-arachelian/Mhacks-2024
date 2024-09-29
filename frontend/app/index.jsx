@@ -1,23 +1,41 @@
-import React from 'react';
 import { ImageBackground, StyleSheet, View, Text, TouchableOpacity,} from 'react-native'; // Import Text if not included
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RecipeGenerator from './RecipeGenerator'; // Adjust the path if necessary
 import background_image from '../assets/background_image.jpg'; // Adjust the path if necessary
 import { TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
+import React, { useState, useEffect } from 'react';
+import Constants from "expo-constants";
+
+const { manifest } = Constants;
+
+
 
 // Create the Tab Navigator
 const Tab = createBottomTabNavigator();
-
 // Define HomeScreen component within index.jsx
 function HomeScreen() {
   const navigation = useNavigation(); // Access navigation object
   
+  const [data, setData] = useState([])
+  useEffect(() => {
+    fetch("http://localhost:5000/ingredients").then(
+      res => res.json()
+    ).then(
+      data=> {
+        setData(data);
+        console.log(data);
+      }
+    )
+  }, [])
+
   return (
     <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
         <View style={styles.container}>
             <View style={styles.text_box}>
+
                 <Text style={styles.ingredients}>Enter Ingredients:</Text>
+                
             </View>
             <TextInput 
                 style={styles.input}
