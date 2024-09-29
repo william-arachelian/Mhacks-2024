@@ -70,7 +70,7 @@ The development of RecipeGenerator involves a combination of frontend, backend, 
 ## Future Goals
 - Implement more complex user preference handling.
 - Integrate a shopping cart and recipe saving feature.
-- Expand to a mobile app for better user experience.
+- Expand to a web app for better user experience.
 
 ## Contributing
 Feel free to fork the repository and submit pull requests. For major changes, please open an issue to discuss what you would like to contribute.
