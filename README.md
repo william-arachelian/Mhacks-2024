@@ -14,13 +14,6 @@ The inspiration for RecipEasy stemmed from the common struggle many college stud
 - **Grocery List Integration:** Add ingredients to your grocery list and get recipe recommendations based on what you plan to buy.
 - **Recipe Recommendations:** Request recipe ideas along with ingredient lists, and easily add missing items to your grocery list.
 
-## Expandable Ideas
-- **Mobile App Version:** Develop a mobile app for enhanced accessibility and convenience.
-- **Receipt Scanning:** Scan receipts to automatically add ingredients to your pantry.
-- **Advanced Ingredient Management:** Track specific measurements and quantities for better recipe suggestions.
-- **User Accounts:** Create an account to save recipes and accommodate food preferences like allergies and favorite meals.
-- **Diverse Meal Options:** Choose from various meal types such as Breakfast, Dessert, Dinner, Lunch, Romantic Meals, or Meals for One Person.
-
 ## Technologies & Frameworks
 - **Backend:** Flask
 - **Frontend:** React, Expo, React Native
@@ -71,11 +64,12 @@ The development of RecipEasy involves a combination of frontend, backend, and AI
 ### React Navigation & Expo Router
 - For routing between pages, refer to [Expo Router Documentation](https://docs.expo.dev/router/create-pages/).
 
-## Future Goals
-- Receipt Scanning: Add receipt scanning to automatically input purchased ingredients, keeping users' lists up-to-date effortlessly.
-- Ingredient Expiration Management: Track ingredient expiration dates and send alerts to help reduce food waste and use items while fresh.
-- User Accounts: Introduce user accounts for saving recipes, tracking ingredients, and getting personalized meal recommendations.
-- Diverse Meal Options: Expand the recipe selection to include diverse meals for various diets, cuisines, and cooking skill levels.
+## Expandable Ideas
+- **Receipt Scanning:** Scan receipts to automatically add ingredients to your pantry.
+- **Ingredient Expiration Management:** Track ingredient expiration dates and send alerts to help reduce food waste and use items while fresh.
+- **User Accounts:** Create an account to save recipes and accommodate food preferences like allergies and favorite meals.
+- **Diverse Meal Options:** Choose from various meal types such as Breakfast, Dessert, Dinner, Lunch, Romantic Meals, or Meals for One Person.
+
 
 ## How To Run
 - run npm install
