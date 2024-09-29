@@ -1,4 +1,3 @@
-import React from 'react';
 import { ImageBackground, StyleSheet, View, Text, TouchableOpacity, ScrollView,} from 'react-native'; // Import Text if not included
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RecipeGenerator from './RecipeGenerator'; // Adjust the path if necessary
@@ -28,7 +27,6 @@ function HomeScreen() {
   return (
     <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
 
-<frontend_touchups
         <ScrollView contentContainerStyle={styles.scrollViewContainer}>
             <View style={styles.container}>
                 <View style={styles.text_box}>
