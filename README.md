@@ -1,13 +1,12 @@
 # Mhacks-2024
 
-# 🍲 RecipeGenerator
+# 🍲 RecipEasy
 
-RecipeGenerator is a web app that suggests delicious food recipes based on the ingredients users have available. By leveraging AI and advanced querying, it provides personalized recipes tailored to your preferences and available ingredients. Whether you're planning a grocery list or looking for recipe inspiration, RecipeGenerator has you covered!
+RecipEasy is a web app that suggests delicious food recipes based on the ingredients users have available. By leveraging AI and advanced querying, it provides personalized recipes tailored to your preferences and available ingredients. Whether you're planning a grocery list or looking for recipe inspiration, RecipEasy has you covered!
 
-## How to Start
-Frontend:
+## Inspiration
 
-Backend:
+The inspiration for RecipEasy stemmed from the common struggle many college students face: food spoilage. With busy schedules and limited meal planning, it's easy for groceries to be forgotten and go to waste. Our goal was to create an app that not only helps track ingredients before they spoil but also provides creative recipe suggestions based on what’s already available in the pantry. By using AI-powered recipe generation and GROQ for matching ingredients, we aim to minimize food waste and make cooking easier and more enjoyable for students and anyone with a hectic lifestyle. This way, users can make the most of their ingredients, avoid unnecessary trips to the grocery store, and always have a meal idea ready, no matter how limited their options might seem.
 
 ## Key Features
 - **Ingredient-Based Recipe Suggestions:** Input the ingredients you have, and the app will suggest recipes you can make.
@@ -29,13 +28,9 @@ Backend:
 - **AI Integration:** GPT-4 API
 - **Recipe Generation:** GROQ (Graph-Relational Object Queries) is used to intelligently generate recipes by matching ingredient data with user inputs.
 
-## Inspiration
-
-The inspiration for RecipeGenerator stemmed from the common struggle many college students face: food spoilage. With busy schedules and limited meal planning, it's easy for groceries to be forgotten and go to waste. Our goal was to create an app that not only helps track ingredients before they spoil but also provides creative recipe suggestions based on what’s already available in the pantry. By using AI-powered recipe generation and GROQ for matching ingredients, we aim to minimize food waste and make cooking easier and more enjoyable for students and anyone with a hectic lifestyle. This way, users can make the most of their ingredients, avoid unnecessary trips to the grocery store, and always have a meal idea ready, no matter how limited their options might seem.
-
 ## Design Process
 
-The development of RecipeGenerator involves a combination of frontend, backend, and AI integration to deliver a seamless user experience. Here’s an overview of the design process:
+The development of RecipEasy involves a combination of frontend, backend, and AI integration to deliver a seamless user experience. Here’s an overview of the design process:
 
 1. **Project Initialization:**
    - Set up the project environment, including the repository, virtual environment, and necessary libraries such as Flask, React, and the GPT-4 API.
@@ -77,9 +72,10 @@ The development of RecipeGenerator involves a combination of frontend, backend, 
 - For routing between pages, refer to [Expo Router Documentation](https://docs.expo.dev/router/create-pages/).
 
 ## Future Goals
-- Implement more complex user preference handling.
-- Integrate a shopping cart and recipe saving feature.
-- Expand to a mobile app for better user experience.
+- Receipt Scanning: Add receipt scanning to automatically input purchased ingredients, keeping users' lists up-to-date effortlessly.
+- Ingredient Expiration Management: Track ingredient expiration dates and send alerts to help reduce food waste and use items while fresh.
+- User Accounts: Introduce user accounts for saving recipes, tracking ingredients, and getting personalized meal recommendations.
+- Diverse Meal Options: Expand the recipe selection to include diverse meals for various diets, cuisines, and cooking skill levels.
 
 ## How To Run
 
@@ -103,4 +99,4 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ---
 
-Enjoy creating and discovering new recipes with RecipeGenerator! 🍽️
+Enjoy creating and discovering new recipes with RecipEasy! 🍽️
