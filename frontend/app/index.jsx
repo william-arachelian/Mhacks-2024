@@ -16,8 +16,8 @@ function HomeScreen() {
   
   return (
     <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
-        <ScrollView>
         <View style={styles.container}>
+        <ScrollView>
             <View style={styles.text_box}>
                 <Text style={styles.ingredients}>Enter Ingredients:</Text>
             </View>
@@ -27,12 +27,12 @@ function HomeScreen() {
 
             <TouchableOpacity
                 style={styles.button} 
-                onPress={() => navigation.navigate('Recipe Generator')}  // Navigate to RecipeGenerator screen
+                  // Navigate to RecipeGenerator screen
             >
                 <Text style={styles.buttonText}>Show me Recipes!</Text> 
             </TouchableOpacity>
+        </ScrollView>      
         </View>
-        </ScrollView>
     </ImageBackground>
   );
 }
