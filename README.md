@@ -81,6 +81,15 @@ The development of RecipeGenerator involves a combination of frontend, backend, 
 - Integrate a shopping cart and recipe saving feature.
 - Expand to a mobile app for better user experience.
 
+## How To Run
+
+### Backend
+- create an environment or run source env/bin/activate
+- Python version 3.10.12
+- run pip install -r requirements.txt
+- 
+
+
 ## Contributing
 Feel free to fork the repository and submit pull requests. For major changes, please open an issue to discuss what you would like to contribute.
 
