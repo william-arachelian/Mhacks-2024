@@ -11,7 +11,6 @@ RecipeGenerator is a app that suggests delicious food recipes based on the ingre
 - **Recipe Recommendations:** Request recipe ideas along with ingredient lists, and easily add missing items to your grocery list.
 
 ## Expandable Ideas
-- **Mobile App Version:** Develop a mobile app for enhanced accessibility and convenience.
 - **Receipt Scanning:** Scan receipts to automatically add ingredients to your pantry.
 - **Advanced Ingredient Management:** Track specific measurements and quantities for better recipe suggestions.
 - **User Accounts:** Create an account to save recipes and accommodate food preferences like allergies and favorite meals.
