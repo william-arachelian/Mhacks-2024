@@ -1,6 +1,6 @@
 # Mhacks-2024
 
-# 🍲 RecipeGenerator
+# 🍲 RecipeGenerator 🍲 
 
 RecipeGenerator is a web app that suggests delicious food recipes based on the ingredients users have available. By leveraging AI, it provides personalized recipes tailored to your preferences and available ingredients. Whether you're planning a grocery list or looking for recipe inspiration, RecipeGenerator has you covered!
 
