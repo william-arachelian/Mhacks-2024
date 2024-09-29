@@ -185,7 +185,7 @@ def delete_recipe(id: str):
             raise ValueError('invalid id string')
         
         db = get_database()
-        recipesCollection = db['recipe']
+        recipesCollection = db['recipes']
 
         filter={"_id": ObjectId(id)}
         res = recipesCollection.delete_one(filter)

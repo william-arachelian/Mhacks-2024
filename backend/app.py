@@ -57,12 +57,13 @@ def recipes_findone_handler(recipe_id):
 
 @app.route("/recipes/add", methods=["POST"])
 def recipes_add_handler():
-    
+    data = request.get_json()
+
     recipe = {
-        "name": request.data['name'],
-        "ingredients" : request.data["ingredients"],
-        "instructions": request.data["instructions"],
-        "ratings": request.data["ratings"] if request.data.get("ratings") != None else None
+        "name": data['name'],
+        "ingredients" : data["ingredients"],
+        "instructions": data["instructions"],
+        "ratings": data["ratings"] if data.get("ratings") != None else None
     }
     
     context = add_recipe(recipe)
@@ -76,7 +77,7 @@ def recipes_add_handler():
 @app.route("/recipes/delete/<string:recipe_id>", methods=["DELETE"])
 def recipes_delete_handler(recipe_id):
     
-    context = delete_ingredient(recipe_id)
+    context = delete_recipe(recipe_id)
     
     if "error" in context:
         return jsonify({"message": "Failure", "status_code": 404}) 
