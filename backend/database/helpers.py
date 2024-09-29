@@ -30,20 +30,22 @@ def is_valid_recipe(input):
         print('name attribute must be of type string')
         return False
     
-    if input.get('description') == None:
-        print('description attribute does not exist')
+    if input.get('instructions') == None:
+        print('instructions attribute does not exist')
         return False
     
-    if type(input['description']) is not str:
-        print('description attribute must be of type string')
-        return False
+    for i in range(0, len(input['instructions'])):
+        instruction = input['instructions'][i]
+        if type(instruction) is not str:
+            print(f'instruction in instructions attribute is invalid')
+            return False
     
     if input.get('ingredients') == None:
         print('ingredients attribute does not exist')
         return False
     
     for key in input.keys():
-            if not ("ingredients" == key or "description" == key or "rating" == key  or "name" == key):
+            if not ("ingredients" == key or "instructions" == key or "rating" == key  or "name" == key):
                 print("schema not correct")
                 return False
     
