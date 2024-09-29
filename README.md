@@ -16,9 +16,9 @@ The inspiration for RecipEasy stemmed from the common struggle many college stud
 
 ## Technologies & Frameworks
 - **Backend:** Flask
-- **Frontend:** React, Expo, React Native
+- **Frontend:** Expo, React Native
 - **Database:** MongoDB
-- **AI Integration:** GPT-4 API
+- **AI Integration:** GROQ and LangChain
 - **Recipe Generation:** GROQ (Graph-Relational Object Queries) is used to intelligently generate recipes by matching ingredient data with user inputs.
 
 ## Design Process
@@ -26,7 +26,7 @@ The inspiration for RecipEasy stemmed from the common struggle many college stud
 The development of RecipEasy involves a combination of frontend, backend, and AI integration to deliver a seamless user experience. Here’s an overview of the design process:
 
 1. **Project Initialization:**
-   - Set up the project environment, including the repository, virtual environment, and necessary libraries such as Flask, React, and the GPT-4 API.
+   - Set up the project environment, including the repository, virtual environment, and necessary libraries such as Flask, React, and GROQ.
    - Define core features like ingredient input, AI-powered recipe generation, and grocery list management.
 
 2. **Backend Development:**
@@ -34,7 +34,7 @@ The development of RecipEasy involves a combination of frontend, backend, and AI
    - Integrate a database using MongoDB to store user information, ingredients, and recipe data.
 
 3. **AI and GROQ Integration:**
-   - Connect to the GPT-4 API to generate creative and structured recipes.
+   - Connect to GROQ's API to generate creative and structured recipes.
    - Use GROQ for querying and matching ingredient data with recipe requirements to intelligently generate suggestions based on available ingredients.
 
 4. **Frontend Development:**
@@ -49,7 +49,6 @@ The development of RecipEasy involves a combination of frontend, backend, and AI
    - Refine the AI model prompts and GROQ queries to improve the quality and relevance of recipe suggestions.
 
 7. **Deployment:**
-   - Deploy the web app on a cloud platform such as Heroku for easy access and scalability.
    - Perform a final round of testing to ensure the app is accessible and functional across different platforms and devices.
 
 ## Frontend Design
@@ -70,13 +69,11 @@ The development of RecipEasy involves a combination of frontend, backend, and AI
 - **User Accounts:** Create an account to save recipes and accommodate food preferences like allergies and favorite meals.
 - **Diverse Meal Options:** Choose from various meal types such as Breakfast, Dessert, Dinner, Lunch, Romantic Meals, or Meals for One Person.
 
-
 ## How To Run
 - run npm install
 - run npm start
 - install expo go on Android or IOS
 - scan the QR code
-
 
 ## Contributing
 Feel free to fork the repository and submit pull requests. For major changes, please open an issue to discuss what you would like to contribute.
