@@ -8,10 +8,10 @@ db = get_database
 def get_index():
     return render_template("ingredients_list.html")
     
-@app.route("/ingredients/")
+@app.route("/ingredients")
 def ingredients():
     res = get_ingredients()
-    return render_template("ingredients_list.html", ingredients = res)
+    return jsonify(res)
 
 @app.route("/ingredients/findone")
 def ingredients_findone_handler():
@@ -87,3 +87,6 @@ def recipes_delete_handler():
     
     return jsonify({"message": "Success", "status_code": 201}), 201
     
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
