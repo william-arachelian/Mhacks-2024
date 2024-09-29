@@ -4,6 +4,8 @@
 
 RecipeGenerator is a web app that suggests delicious food recipes based on the ingredients users have available. By leveraging AI, it provides personalized recipes tailored to your preferences and available ingredients. Whether you're planning a grocery list or looking for recipe inspiration, RecipeGenerator has you covered!
 
+The inspiration for RecipeGenerator stemmed from the common struggle many college students face: food spoilage. With busy schedules and limited meal planning, it's easy for groceries to be forgotten and go to waste. Our goal was to create an app that not only helps track ingredients before they spoil but also provides creative recipe suggestions based on what’s already available in the pantry. By using AI-powered recipe generation, we aim to minimize food waste and make cooking easier and more enjoyable for students and anyone with a hectic lifestyle. This way, users can make the most of their ingredients, avoid unnecessary trips to the grocery store, and always have a meal idea ready, no matter how limited their options might seem.
+
 ## Key Features
 - **Ingredient-Based Recipe Suggestions:** Input the ingredients you have, and the app will suggest recipes you can make.
 - **AI-Powered Recipe Generation:** Using GPT-4 to generate unique and creative recipes based on user inputs.
