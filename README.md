@@ -19,7 +19,7 @@ The inspiration for RecipEasy stemmed from the common struggle many college stud
 - **Frontend:** Expo, React Native
 - **Database:** MongoDB
 - **AI Integration:** GROQ and LangChain
-- **Recipe Generation:** GROQ (Graph-Relational Object Queries) is used to intelligently generate recipes by matching ingredient data with user inputs.
+- **Recipe Generation:** GROQ is used to intelligently generate recipes by matching ingredient data with user inputs.
 
 ## Design Process
 
