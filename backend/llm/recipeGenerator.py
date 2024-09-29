@@ -85,7 +85,7 @@ def generate_recipes_langGroq(ingredients_list=[]):
     )
 
     messages = [
-        ("system", f"You are a chef. Make 5 recipes {' with the ingredients that the user lists out' if len(ingredients_list) != 0 else ' with affordable ingredients'}. The recipes must be in the form of a python dictionary with three attributes, name, instructions, and ingredients: recipe = {{name: (title of recipe), instructions: (array of steps in order), ingredients: (list of ingredients for the recipe)}} "),
+        ("system", f"You are a chef. Make 5 recipes {' with the ingredients that the user lists out. If you recognize a type in the ingredients list, you can correct it.' if len(ingredients_list) != 0 else ' with affordable ingredients'}. The recipes must be in the form of a python dictionary with three attributes, name, instructions, and ingredients: recipe = {{name: (title of recipe), instructions: (array of steps in order), ingredients: (list of ingredients for the recipe)}}"),
         ("human", ingredients_toString),
     ]
     llm.invoke(messages)
