@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import ListWithScroll from "./ListWScroll";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import SavedRecipes from './SavedRecipes';
 
 // Create the Tab Navigator
 const Tab = createBottomTabNavigator();
@@ -22,28 +23,36 @@ function HomeScreen() {
   const navigation = useNavigation(); // Access navigation object
 
   return (
-    <ImageBackground
-      source={background_image}
-      resizeMode="cover"
-      style={styles.background_image}
-    >
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.text_box}>
-            <Text style={styles.ingredients}>Enter Ingredients:</Text>
-          </View>
+    <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
 
-          {/* List of Ingredients User Enters */}
-          <ListWithScroll />
+        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+            <View style={styles.container}>
+                <View style={styles.text_box}>
+                    <Text style={styles.ingredients}>Enter Ingredients:</Text>
+                </View>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Recipe Generator")} // Navigate to RecipeGenerator screen
-          >
-            <Text style={styles.buttonText}>Show me Recipes!</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+                {/* List of Ingredients User Enters */}
+                <ListWithScroll/>
+
+                <TouchableOpacity
+                    style={styles.button} 
+                    onPress={() => navigation.navigate('Recipe Generator')}  // Navigate to RecipeGenerator screen
+                >
+                    <Text style={styles.buttonText}>Show me Recipes!</Text> 
+                </TouchableOpacity>
+
+
+                <View style={styles.intro}>
+                    <Text style={styles.introText}>
+                        RecipEasy suggests delicious recipes based on the ingredients you have. 
+                        Using AI, it tailors personalized recipes to your available ingredients. 
+                        Whether planning a grocery list or seeking inspiration, RecipeGenerator has you covered!
+                    </Text>
+                </View>
+
+
+            </View>
+        </ScrollView>
     </ImageBackground>
   );
 }
@@ -52,24 +61,48 @@ function HomeScreen() {
 export default function Index() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="RecipEasy" component={HomeScreen} />
-      <Tab.Screen name="Recipe Generator" component={RecipeGenerator} />
+        <Tab.Screen name="RecipEasy" component={HomeScreen} />
+        <Tab.Screen name="Recipe Generator" component={RecipeGenerator} />
+        <Tab.Screen name="Save Recipes" component={SavedRecipes}/>
     </Tab.Navigator>
   );
 }
 
 const styles = StyleSheet.create({
+ 
+  intro: {
+    padding: 20,                
+    marginBottom: 40,               
+    textAlign: 'center',            
+    color: '#333',           
+    fontSize: 30,                   
+    lineHeight: 34,                
+    backgroundColor: '#f5f5dc',       
+    borderRadius: 15,  
+    fontWeight: 'bold',                
+    
+  },  
+
+  introText: {
+    color: '#333',
+    fontSize: 20,
+    fontFamily: 'Georgia', // Change to a different font family
+    
+  },
+
   text_box: {
-    borderColor: "#777",
-    backgroundColor: "#f5f5dc",
-    padding: 8,
+    borderColor: '#777',
+    backgroundColor: '#f5f5dc',
+    padding: 12,
     margin: 10,
     borderRadius: 15,
   },
 
   ingredients: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 35, 
+    fontWeight: 'bold', 
+    textDecorationLine: 'underline',
+
   },
 
   background_image: {
@@ -81,6 +114,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 100,
+    paddingBottom: 200,
   },
 
   input: {
@@ -98,6 +132,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5dc",
     padding: 12,
     borderRadius: 15,
+    marginBottom: 40,
   },
 
   buttonText: {
