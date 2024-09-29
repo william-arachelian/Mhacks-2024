@@ -78,13 +78,6 @@ The development of RecipEasy involves a combination of frontend, backend, and AI
 - Diverse Meal Options: Expand the recipe selection to include diverse meals for various diets, cuisines, and cooking skill levels.
 
 ## How To Run
-
-### Backend
-- create an environment for python (version 3.10.12)
-- run pip install -r requirements.txt
-- run python app.py
-
-### Frontend
 - run npm install
 - run npm start
 - install expo go on Android or IOS
