@@ -2,7 +2,7 @@
 
 # 🍲 RecipeGenerator 🍲
 
-RecipeGenerator is a web app that suggests delicious food recipes based on the ingredients users have available. By leveraging AI and advanced querying, it provides personalized recipes tailored to your preferences and available ingredients. Whether you're planning a grocery list or looking for recipe inspiration, RecipeGenerator has you covered!
+RecipeGenerator is a app that suggests delicious food recipes based on the ingredients users have available. By leveraging AI and advanced querying, it provides personalized recipes tailored to your preferences and available ingredients. Whether you're planning a grocery list or looking for recipe inspiration, RecipeGenerator has you covered!
 
 ## Key Features
 - **Ingredient-Based Recipe Suggestions:** Input the ingredients you have, and the app will suggest recipes you can make.
