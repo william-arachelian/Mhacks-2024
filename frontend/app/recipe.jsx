@@ -1,23 +1,44 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
-
 export default function Page() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Pressable style={styles.button} onPress={()=> router.replace("/")}>
-      <Text style={styles.text}>back</Text>
-    </Pressable>
-      </View>
 
+  const BackButton = () => {  
+    return (
+      <TouchableOpacity style={styles.button} onPress={() => router.replace('/')}>
+        <Text style={styles.text}>Back</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <BackButton>
+      <View style={styles.container}>
+        <Text>back</Text>
+      </View>
+    </BackButton>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    padding:24,
+    margin:50,
+    width:150,
+    backgroundColor: '#',
+    alignItems: 'left',
     justifyContent: 'center',
   },
+  button: {
+    position: 'absolute',
+    top: 20, // Adjust based on your header height
+    left: 10, // Padding from the left edge
+    padding: 10,
+    backgroundColor: '#f0f0f0', // Change as needed
+    borderRadius: 5,
+  },
+  text: {
+    color: '#007BFF', // Change as needed
+    fontSize: 16,
+  },
 });
+

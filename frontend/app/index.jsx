@@ -27,6 +27,7 @@ function HomeScreen() {
 
   return (
     <ImageBackground source={background_image} resizeMode="cover" style={styles.background_image}>
+
 <frontend_touchups
         <ScrollView contentContainerStyle={styles.scrollViewContainer}>
             <View style={styles.container}>
@@ -52,6 +53,7 @@ function HomeScreen() {
                         Whether planning a grocery list or seeking inspiration, RecipeGenerator has you covered!
                     </Text>
                 </View>
+
 
             </View>
         </ScrollView>
