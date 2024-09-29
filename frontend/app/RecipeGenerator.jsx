@@ -11,9 +11,8 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ListItem } from "react-native-elements";
-import { router } from "expo-router";
 import Recipe from "../app/recipe" 
-import { useNavigation } from "expo-router";
+import { useNavigation, router, useRouter } from "expo-router";
 import background_image from "../assets/background_image.jpg"; // Adjust the path if necessary
 import * as SplashScreen from "expo-splash-screen";
 import axios from "axios";
@@ -23,7 +22,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function Page(props) {
   
-  const navigation = useNavigation();
+  const router = useRouter();
   const isFocused = useIsFocused();
   const [ingredients, setIngredients] = useState([]);
   // const [recipes, setRecipes] = useState([]);
@@ -85,7 +84,12 @@ export default function Page(props) {
         list.map((item, i) => {
           console.log(item)
           return (
-          <TouchableHighlight key={i} onPress={() => navigation.navigate({name: "recipe", params: {name: item.name}})}>
+          <TouchableHighlight key={i} onPress={() => router.push({ pathname: "recipe", params: {
+            name:item.name,
+            instructions:item.instructions,
+            ingredients:item.ingredients,
+            rating:item.rating
+            }})}>
             <View style={styles.textboxName}>
             <Text>{item.name}</Text>
             </View>

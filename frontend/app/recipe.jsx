@@ -1,7 +1,10 @@
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
+import { useLocalSearchParams } from "expo-router";
 export default function Page( props ) {
-  console.log()
+  const {name,ingredients,instructions,rating} = useLocalSearchParams();
+  
+  console.log(typeof ingredients)
   const BackButton = () => {
     return (
       <TouchableOpacity
@@ -14,11 +17,13 @@ export default function Page( props ) {
   };
 
   return (
+    <View>
     <BackButton>
       <View style={styles.container}>
         <Text>back</Text>
       </View>
     </BackButton>
+    </View>
   );
 }
 
