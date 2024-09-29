@@ -150,7 +150,7 @@ def add_recipe(input: dict):
     # adds a new recipe object with parameters in input dictionary
     # input{name, description, rating=none, ingredients[]}
     # returns success or failure
-
+    print(input)
     try:
         if not is_valid_recipe(input):
             raise ValueError("invalid recipe input")

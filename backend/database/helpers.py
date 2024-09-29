@@ -45,17 +45,17 @@ def is_valid_recipe(input):
         return False
     
     for key in input.keys():
-            if not ("ingredients" == key or "instructions" == key or "rating" == key  or "name" == key or "_id" == key):
+            if not ("ingredients" == key or "instructions" == key or "ratings" == key  or "name" == key or "_id" == key):
                 print("schema not correct")
                 return False
     
     
-    for i in range(0, len(input['ingredients'])):
-        ingredient = input['ingredients'][i]
-        if not is_valid_ingredient(ingredient):
-            print(f'ingredient in ingredients attribute is invalid')
+    # for i in range(0, len(input['ingredients'])):
+    #     ingredient = input['ingredients'][i]
+    #     if not is_valid_ingredient(ingredient):
+    #         print(f'ingredient in ingredients attribute is invalid')
 
-            return False
+    #         return False
     
     return True
 

@@ -71,7 +71,7 @@ const navigation = useNavigation()
             };
 
             axios.post("http://35.3.86.167:5000/recipes/add", recipeObj);
-            navigation.navigate("SavedRecipes");
+            navigation.goBack();
           }}
           title="Save Recipe"
           color="#841584"

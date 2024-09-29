@@ -59,7 +59,7 @@ def recipes_findone_handler(recipe_id):
 @app.route("/recipes/add", methods=["POST"])
 def recipes_add_handler():
     data = request.get_json()
-
+    print(data)
     recipe = {
         "name": data['name'],
         "ingredients" : data["ingredients"],

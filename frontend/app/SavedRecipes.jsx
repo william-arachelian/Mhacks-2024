@@ -62,6 +62,7 @@ export default function Page() {
   );
 }
 
+
 const styles = StyleSheet.create({
   all: {
     flex: 1,
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 24,
     padding: 24,
-    backgroundColor: "#dddddd",
+    backgroundColor: "#f5f5dc",
     textAlign: "center",
   },
 
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     width: 300,
-    backgroundColor: "#fff",
+    backgroundColor: "pink",
     borderRadius: 10,
     borderBottomColor: "#000",
   },

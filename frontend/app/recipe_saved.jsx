@@ -72,6 +72,7 @@ export default function Page(props) {
         />
       </View>
     </View>
+    
   );
 }
 
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     // left: 30,
     width: 300,
     height: 500,
-    backgroundColor: "#",
+    backgroundColor: "",
     display: "flex",
     flexDirection: "column",
     alignContent: "center",
