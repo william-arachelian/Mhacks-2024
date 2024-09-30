@@ -2,7 +2,7 @@
 
 # 🍲 RecipEasy 🍲
 
-RecipEasy is a web app that suggests delicious food recipes based on the ingredients users have available. By leveraging AI and advanced querying, it provides personalized recipes tailored to your preferences and available ingredients. Whether you're planning a grocery list or looking for recipe inspiration, RecipEasy has you covered!
+RecipEasy is a mobile app that suggests delicious food recipes based on the ingredients users have available. By leveraging AI and advanced querying, it provides personalized recipes tailored to your preferences and available ingredients. Whether you're planning a grocery list or looking for recipe inspiration, RecipEasy has you covered!
 
 ## Inspiration
 
