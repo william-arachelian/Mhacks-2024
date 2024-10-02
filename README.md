@@ -54,7 +54,7 @@ The development of RecipEasy involves a combination of frontend, backend, and AI
 ## Frontend Design
 
 ### Figma Design
-- Explore our [Figma Design](https://www.figma.com/design/pWNFldC9ix5EgPO57cD8j2/Untitled?node-id=0-1&t=Cbh6UZOloXIZazBj-1) for a detailed mockup of the user interface.
+- Explore our [Figma Design](https://www.figma.com/design/ZVGrPE8roqFaPQx1QCP9gs/RecipEasy?node-id=0-1&t=6jE1MmGeCkZqJ9MQ-1) for a detailed mockup of the user interface.
 
 ### Ingredients List Page (Main)
 - Users enter a list of ingredients, each separated by a comma.
