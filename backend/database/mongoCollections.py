@@ -66,8 +66,9 @@ def add_ingredient(input:dict):
         
         ingredientObj = {
             "name": input['name'],
-            "date": datetime.now(),
-            "quantity": input['quantity'] if input.get('quantity') != None else 1
+            "expirationDate": input["expirationDate"],
+            "quantity": input['quantity'] if input.get('quantity') != None else 1,
+            "unit": input['unit']
         }
 
         db = get_database()

@@ -17,14 +17,15 @@ const IngredientsPage = () => {
   
   useEffect(()=>{
     axios.get("http://127.0.0.1:5000/ingredients/")
-      .then((response) => {
-        setIngredientsList([...response.data["ingredients"]]);
-        console.log(ingredientsList)
-      })
-      .catch((e) => {
-        console.log(e);
-      })
+    .then((response) => {
+      setIngredientsList([...response.data["ingredients"]]);
+    })
+    .catch((e) => {
+      console.log(e);
+    })
   }, []);
+
+
 
   return (
     <SafeAreaView className="flex-1">
@@ -49,6 +50,8 @@ const IngredientsPage = () => {
       >
           {ingredientsList.map((ingredient, i)=> (
             <IngredientListItem 
+              ingredientsList = {ingredientsList}
+              setIngredientsList = {setIngredientsList}
               key={i}
               _id={ingredient._id}
               name={ingredient.name} 

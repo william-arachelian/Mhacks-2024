@@ -14,7 +14,7 @@ def is_valid_ingredient(input):
             print('quantity attribute must be of type int')    
             return False
         for key in input.keys():
-            if not ("name" == key or "date" == key or "quantity" == key or "_id" == key):
+            if not ("name" == key or "expirationDate" == key or "quantity" == key or "unit" == key or "_id" == key):
                 print("schema not correct")
                 return False
         
