@@ -2,7 +2,7 @@ from groq import Groq
 import ast
 from langchain_groq import ChatGroq
 from database.mongoCollections import get_ingredients
-from backend.config import GROQ_API_KEY 
+#from backend.config import GROQ_API_KEY 
 
 def generate_recipe_groq():
 #get ingredients list from backend
@@ -81,7 +81,7 @@ def generate_recipes_langGroq():
     ingredients_toString = ", ".join(ingredients_list)
 
     llm = ChatGroq(
-        api_key=GROQ_API_KEY(),
+        api_key="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",
         model="mixtral-8x7b-32768",
         temperature=0.2,
         max_tokens=None,

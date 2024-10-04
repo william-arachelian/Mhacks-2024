@@ -7,7 +7,7 @@ from datetime import date
 app = Flask(__name__)
 db = get_database
     
-@app.route("/ingredients")
+@app.route("/ingredients/")
 def ingredients():
     res = get_ingredients()
     return {"ingredients": res}
