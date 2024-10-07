@@ -1,9 +1,8 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import icons from "./../assets/Constants.js";
-import { useEffect } from "react";
 import axios from "axios";
+
 const IngredientListItem = ({
-  ingredientsList,
   setIngredientsList,
   name,
   exiprationDate,
@@ -51,7 +50,7 @@ const IngredientListItem = ({
           <View className="w-[50] h-full items-center justify-center">
             <Image
               className="w-[45%] h-[45%]"
-              source={icons.Vector}
+              source={icons.Trash}
               resizeMode="contain"
             />
           </View>
