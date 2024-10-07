@@ -14,17 +14,29 @@ import {
   
     const [searchQuery, setSearchQuery] = useState("");
     const [ingredientsList, setIngredientsList] = useState([]);
-    
-    useEffect(()=>{
-      axios.get("http://127.0.0.1:5000/ingredients/")
-      .then((response) => {
-        setIngredientsList([...response.data["ingredients"]]);
-      })
-      .catch((e) => {
-        console.log(e);
-      })
-    }, []);
   
+    useEffect(()=>{
+        if (searchQuery !== ""){
+            axios.get(`http://127.0.0.1:5000/ingredients/searchByName/${searchQuery}`)
+            .then((response) => {
+                setIngredientsList([...response.data["ingredients"]])
+            })
+            .catch((e) => {
+                console.log(e);
+            })
+        }
+        else {
+            axios.get("http://127.0.0.1:5000/ingredients/")
+            .then((response) => {
+                setIngredientsList([...response.data["ingredients"]]);
+            })
+            .catch((e) => {
+                console.log(e);
+            })
+        }
+
+    },[searchQuery])
+
     return (
       <SafeAreaView className="flex-1">
         <View className="h-[200] mb-[80]">
@@ -35,8 +47,9 @@ import {
               <Text>Search for an Ingredient:</Text>
   
               <TextInput className="w-full h-full bg-secondary rounded-lg text-center"
-                placeholder="e.g. Eggs, Milk, Chicken"
-                onChangeText={(input) => setSearchQuery(input)}
+                placeholder={"e.g. Eggs, Milk, Chicken"}
+                value={searchQuery}
+                onChangeText={(text) => {setSearchQuery(text)}}
               />
   
             </View>
@@ -50,6 +63,7 @@ import {
               <IngredientListItem 
                 ingredientsList = {ingredientsList}
                 setIngredientsList = {setIngredientsList}
+                setSearchQuery={setSearchQuery}
                 key={i}
                 _id={ingredient._id}
                 name={ingredient.name} 

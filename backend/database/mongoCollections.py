@@ -3,6 +3,7 @@ from datetime import datetime
 from database.mongoConnection import get_database
 from bson.objectid import ObjectId
 from bson.json_util import dumps, loads 
+import re
 # Schemas:
 
 # ingredients {
@@ -51,6 +52,21 @@ def get_ingredient(id: str):
             return res
         else:
             raise ValueError(f"ingredient with id {id} not found")
+    except Exception as e:
+        print(e)
+        return {"error": e}
+
+def search_ingredient_by_name(name: str):
+    try:
+        db = get_database()
+        ingredeintsCollection = db['ingredients']
+
+        filter = {"name": re.compile(f"^{re.escape(name)}.*", re.IGNORECASE)}
+        res = list(ingredeintsCollection.find(filter))
+
+        res = list(map(lambda obj : {**obj, "_id": str(obj["_id"])}, res))
+        return res
+    
     except Exception as e:
         print(e)
         return {"error": e}

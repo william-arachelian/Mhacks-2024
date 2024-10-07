@@ -4,6 +4,7 @@ import axios from "axios";
 
 const IngredientListItem = ({
   setIngredientsList,
+  setSearchQuery,
   name,
   exiprationDate,
   quantity,
@@ -15,11 +16,10 @@ const IngredientListItem = ({
     axios
       .delete(`http://127.0.0.1:5000/ingredients/delete/${_id}`)
       .then((response) => {
-        console.log(response);
-
-        axios.get("http://127.0.0.1:5000/ingredients").then((response) => {
-          setIngredientsList([...response.data["ingredients"]]);
-        });
+        // axios.get("http://127.0.0.1:5000/ingredients").then((response) => {
+        //   setIngredientsList([...response.data["ingredients"]]);
+        // });
+        setSearchQuery("");
       })
       .catch((e) => {
         console.log(e);

@@ -17,6 +17,10 @@ def ingredients_findone_handler(ingredient_id):
     res = get_ingredient(ingredient_id)
     return res
 
+@app.route("/ingredients/searchByName/<string:ingredient_name>")
+def ingredients_searchByName_handler(ingredient_name):
+    res = search_ingredient_by_name(ingredient_name)
+    return {"ingredients" : res}
 
 @app.route("/ingredients/add", methods=["POST"])
 def ingredients_add_handler():
