@@ -7,11 +7,14 @@ import {
     TouchableOpacity
   } from "react-native";
   import React, { useEffect, useState } from "react";
+  import {useNavigation} from "expo-router";
   import axios from "axios";
-  import IngredientListItem from "../../components/IngredientListItem";
+  import IngredientListItem from "../../../components/IngredientListItem.js";
   
   const IngredientsList = () => {
-  
+    
+    const navigation = useNavigation();
+
     const [searchQuery, setSearchQuery] = useState("");
     const [ingredientsList, setIngredientsList] = useState([]);
   
@@ -81,10 +84,10 @@ import {
         
         <TouchableOpacity 
           className="px-[40]"
-          onPress={()=>{console.log("go to create ingredient")}}
+          onPress={()=>{navigation.navigate("NewRecipe")}}
         >
           <View className="bg-primary rounded-xl items-center justify-center w-full h-[50] mb-[50]">
-            <Text>Add Ingredient</Text>
+            <Text>Click to Add Ingredient</Text>
           </View>
           
         </TouchableOpacity>
