@@ -8,14 +8,17 @@ import re
 
 # ingredients {
 #     name: str
-#     date: date
 #     quantity(?): float
+#     unit(?): {set of units to choose from}
+#     expirationDate: datetime object
 # }
 
 # recipes {
 #     name: str
 #     ingredients[]: arr[Obj]
 #     instructions[]: arr[str]
+#     description: str
+#     estimatedCookTime: str
 #     rating(?): int
 # }
 

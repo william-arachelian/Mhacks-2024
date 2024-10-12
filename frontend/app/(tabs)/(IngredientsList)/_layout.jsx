@@ -15,7 +15,7 @@ const IngredientsListLayout = () => {
             options={{headerShown: false}}
         />
         <Stack.Screen 
-            name="NewRecipe"
+            name="NewIngredient"
             options={{title: ""}}
         />
     </Stack>    

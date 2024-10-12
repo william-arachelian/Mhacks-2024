@@ -11,6 +11,8 @@ const IngredientListItem = ({
   unit,
   _id,
 }) => {
+  exiprationDate = new Date(exiprationDate);
+
   const handleDelete = (_id) => {
     console.log(`delete ${_id}`);
     axios
@@ -31,7 +33,7 @@ const IngredientListItem = ({
       <View className="flex justify-between">
         <Text className="font-semibold text-xl">{name}</Text>
         <Text className="italic">
-          Expires: {exiprationDate[0]}/{exiprationDate[1]}
+          Expires: {exiprationDate.getMonth()}/{exiprationDate.getDay()}
         </Text>
       </View>
 

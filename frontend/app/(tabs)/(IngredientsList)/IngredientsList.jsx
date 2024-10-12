@@ -84,7 +84,7 @@ import {
         
         <TouchableOpacity 
           className="px-[40]"
-          onPress={()=>{navigation.navigate("NewRecipe")}}
+          onPress={()=>{navigation.navigate("NewIngredient")}}
         >
           <View className="bg-primary rounded-xl items-center justify-center w-full h-[50] mb-[50]">
             <Text>Click to Add Ingredient</Text>

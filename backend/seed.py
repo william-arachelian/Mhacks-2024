@@ -1,7 +1,7 @@
 from database.mongoCollections import * 
 from database.mongoCollections import get_database
 from random import randint
-from datetime import date
+from datetime import datetime, date
 db = get_database()
 ingredientsCollection = db['ingredients']
 
@@ -35,13 +35,11 @@ ingredient_names = [
 
 for i in range(0, len(ingredient_names)):
     try:
-
-        today = date.today()
-
+        
         ingredientObj = {
             "name": ingredient_names[i],
             "quantity": 1,
-            "expirationDate": [today.month, today.day, today.year],
+            "expirationDate": datetime.now().isoformat(),
             "unit": ""
         }
         
