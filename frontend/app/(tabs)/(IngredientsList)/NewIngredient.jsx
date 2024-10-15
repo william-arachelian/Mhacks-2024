@@ -18,16 +18,10 @@ const NewIngredient = () => {
     const units = ["","fl oz", "pt", "qt", "gal", "lbs", "kgs"]
 
     const [calendarVisible, setCalendarVisible] = useState(false);
-    const [expirationDate, setExpirationDate] = useState(null)
-    
 
-    const handleSubmit = () => {
+    const handleSubmit = () => {         
 
-        if (expirationDate !== null) {
-            setIngredientObj({...ingredientObj, "exiprationDate": expirationDate.toISOString()})
-        }
-
-
+        console.log(ingredientObj)
         axios.post("http://127.0.0.1:5000/ingredients/add", ingredientObj)
         .then((response) => {
             console.log(response)
@@ -56,11 +50,13 @@ const NewIngredient = () => {
         </View>
 
         <View className="flex-row justify-between px-10 mb-[20]">
+
             <View className="h-[65] w-[45%]">
                 <TextInput
                     className="bg-secondary w-full h-full text-center rounded-lg"
                     placeholder="Quantity"
-                    onChangeText={(quantity)=>{setIngredientObj({...ingredientObj, "quantity": quantity})}}
+                    onChangeText={(quantity)=>{setIngredientObj({...ingredientObj, "quantity": parseFloat(quantity)})}}
+                    inputMode="decimal"
                 /> 
             </View>
             
@@ -77,7 +73,7 @@ const NewIngredient = () => {
                             placeholder="Unit" 
                             onTouchStart={()=>{setMenuVisible(true)}}
                             editable={false}
-                            onChangeText={(unit)=>{setIngredientObj({...ingredientObj, "unit": unit})}}
+                            //onChangeText={(unit)=>{setIngredientObj({...ingredientObj, "unit": unit})}}
                             value={ingredientObj["unit"]}
 
                         />
@@ -99,8 +95,8 @@ const NewIngredient = () => {
             {calendarVisible ? 
             <DateTimePicker
                 mode="single"
-                date={expirationDate}
-                onChange={(params) => {setExpirationDate(new Date(params.date)); setCalendarVisible(false)}}
+                date={ingredientObj['expirationDate']}
+                onChange={(params) => { setIngredientObj({...ingredientObj, "expirationDate": new Date(params.date)}); setCalendarVisible(false); }}
                 height={250}
                 selectedItemColor= "#5DB075"
             /> : 
@@ -109,7 +105,7 @@ const NewIngredient = () => {
                     className="bg-secondary rounded-lg h-full flex-1 justify-center"
                     onPress={() => setCalendarVisible(true)}
                 >
-                <Text className="text-center text-gray-400">{expirationDate == null ? "Expiration Date" : expirationDate.toDateString()}</Text>
+                <Text className="text-center text-gray-400">{ingredientObj["expirationDate"] == null ? "Expiration Date" : ingredientObj["expirationDate"].toDateString()}</Text>
                 </TouchableOpacity>
             
             </View>

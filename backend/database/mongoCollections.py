@@ -78,16 +78,17 @@ def add_ingredient(input:dict):
     # adds a new ingredient object with parameters in input dictionary
     # input{name, Date=currentDate, quantity=None}
     # returns success or failure
-
     try:
+        print(input)
         if not is_valid_ingredient(input):
             raise ValueError("invalid ingredient input")
         
+       
         ingredientObj = {
-            "name": input['name'],
-            "expirationDate": input["expirationDate"],
-            "quantity": input['quantity'] if input.get('quantity') != None else 1,
-            "unit": input['unit']
+            "name": input.get('name'),
+            "expirationDate": input.get("expirationDate"),
+            "quantity": input.get('quantity'),
+            "unit": input.get('unit')
         }
 
         db = get_database()
@@ -170,7 +171,6 @@ def add_recipe(input: dict):
     # adds a new recipe object with parameters in input dictionary
     # input{name, description, rating=none, ingredients[]}
     # returns success or failure
-    print(input)
     try:
         if not is_valid_recipe(input):
             raise ValueError("invalid recipe input")

@@ -7,17 +7,31 @@ import {
     TouchableOpacity
   } from "react-native";
   import React, { useEffect, useState } from "react";
-  import {useNavigation} from "expo-router";
+  import { useNavigation } from "expo-router";
   import axios from "axios";
   import IngredientListItem from "../../../components/IngredientListItem.js";
   
   const IngredientsList = () => {
-    
+   
     const navigation = useNavigation();
 
     const [searchQuery, setSearchQuery] = useState("");
     const [ingredientsList, setIngredientsList] = useState([]);
+
+    useEffect(() => {
+      const unsubscribe = navigation.addListener('focus', () => {
+        axios.get("http://127.0.0.1:5000/ingredients/")
+        .then((response) => {
+            setIngredientsList([...response.data["ingredients"]]);
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+      });
   
+      return unsubscribe;
+    }, [navigation]);
+
     useEffect(()=>{
         if (searchQuery !== ""){
             axios.get(`http://127.0.0.1:5000/ingredients/searchByName/${searchQuery}`)
@@ -62,7 +76,7 @@ import {
         <ScrollView 
           className="px-10 mb-[50]"
         >
-            {ingredientsList.length != 0 ? ingredientsList.map((ingredient, i)=> (
+            {ingredientsList.length != 0 ? ingredientsList.reverse().map((ingredient, i)=> (
               <IngredientListItem 
                 ingredientsList = {ingredientsList}
                 setIngredientsList = {setIngredientsList}
@@ -76,7 +90,7 @@ import {
               /> 
             )) :
              <View>
-              <Text className="font-sans font-semibold text-center">No Ingredients Yet...</Text>
+              <Text className="font-sans font-regular text-center">No Ingredients Yet...</Text>
             </View>
           }
         </ScrollView>

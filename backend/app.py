@@ -25,13 +25,9 @@ def ingredients_searchByName_handler(ingredient_name):
 @app.route("/ingredients/add", methods=["POST"])
 def ingredients_add_handler():
     data = request.get_json()
+    print(data)
     
-    ingredient = {
-        "name": data['name'],
-        "quantity": data['quantity'] if data.get('quantiy') else None
-    }
-    
-    context = add_ingredient(ingredient)
+    context = add_ingredient(data)
 
     print(context)
     if "error" in context:
