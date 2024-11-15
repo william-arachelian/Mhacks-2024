@@ -9,7 +9,7 @@ import {
   import React, { useEffect, useState } from "react";
   import { useNavigation } from "expo-router";
   import axios from "axios";
-  import IngredientListItem from "../../../components/IngredientListItem.js";
+  import IngredientListItem from "../../../components/IngredientListItem.jsx";
   
   const IngredientsList = () => {
    

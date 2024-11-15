@@ -30,7 +30,7 @@ export default function TabsLayout()
       
     />
     <Tabs.Screen
-      name="GenerateRecipes"
+      name="(GenerateRecipes)"
       options={{
         title: 'Generate',
         headerShown: false,

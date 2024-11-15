@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import icons from "./../assets/Constants.js";
+import icons from "../assets/Constants.js";
 import axios from "axios";
 
 const IngredientListItem = ({
@@ -18,7 +18,8 @@ const IngredientListItem = ({
     axios
       .delete(`http://127.0.0.1:5000/ingredients/delete/${_id}`)
       .then((response) => {
-        axios.get("http://127.0.0.1:5000/ingredients").then((response) => {
+        axios.get("http://127.0.0.1:5000/ingredients")
+        .then((response) => {
           setIngredientsList([...response.data["ingredients"]]);
         });
         setSearchQuery("");
