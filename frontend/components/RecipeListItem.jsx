@@ -6,12 +6,18 @@ const RecipeListItem = ({
     instructions,
     description,
     cookTime,
+    navigation,
 }) => {
     const handlePress = () => {
-        console.log("pressed");
+        navigation.navigate("SingleRecipe", {
+            'name': name,
+            'ingredients': ingredients,
+            'instructions': instructions,
+            'description': description,
+            'cookTime': cookTime})
     }
     return (  
-        <TouchableOpacity className="flex-1 w-full bg-secondary h-[150] rounded-lg p-[10] justify-between mb-[20]"
+        <TouchableOpacity className="flex-1 w-full bg-secondary h-[135] rounded-lg p-[10] justify-between mb-[20]"
             onPress={() => handlePress()}
         >
             <Text className="font-semibold text-xl">{name}</Text>

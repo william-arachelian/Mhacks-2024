@@ -2,9 +2,11 @@ import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from "react-na
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import RecipeListItem from "../../../components/RecipeListItem.jsx"
+import { useNavigation } from "expo-router"
 const GenerateRecipes = () =>{
 
-  [recipeList, setRecipeList] = useState([]);
+  const navigation = useNavigation();
+  const [recipeList, setRecipeList] = useState([]);
 
   const handleGenerate = () => {
     axios.get("http://127.0.0.1:5000/recipes/generate")
@@ -43,6 +45,7 @@ const GenerateRecipes = () =>{
           instructions={recipe.instructions}
           description={recipe.description}
           cookTime={recipe.cookTime}
+          navigation={navigation}
         />
       )}
       

@@ -15,11 +15,11 @@ const GenerateRecipeLayout = () => {
             options={{headerShown: false}}
         />
 
-        {/* for dynamic route to individual recipe when pressed
         <Stack.Screen 
-            name="[individual recipe name]"
-            options={{headerShown: false}}
-        /> */}
+            name="SingleRecipe"
+            options={{title: ""}}
+
+        />
 
         
     </Stack>
