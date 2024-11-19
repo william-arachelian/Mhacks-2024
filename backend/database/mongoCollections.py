@@ -179,7 +179,9 @@ def add_recipe(input: dict):
             "name": input['name'],
             "instructions": input['instructions'],
             "rating": input['rating'] if input.get('rating') != None else -1,
-            "ingredients": input['ingredients']
+            "ingredients": input['ingredients'],
+            "description": input['description'],
+            "cookTime": input["cookTime"]
         }
 
         db = get_database()
@@ -187,12 +189,32 @@ def add_recipe(input: dict):
 
         res = recipesCollection.insert_one(recipeObj)
 
-        if res:
-            recipeObj["id"] = res.inserted_id
+        if res.inserted_id:
+            insertedRecipeObj = recipesCollection.find_one({"_id": res.inserted_id})
+            insertedRecipeObj["_id"] = str(insertedRecipeObj["_id"] )
+            print(insertedRecipeObj)
+
+            return insertedRecipeObj
         else:
             raise ValueError("Insertion Failed")
-        return recipeObj
+       
         
+    except Exception as e:
+        print(e)
+        return {"error": e}
+
+def find_recipe_by_name(name: str):
+    try:
+        
+        db = get_database()
+        recipesCollection = db['recipes']
+        filter = {"name": re.compile(f"^{re.escape(name)}.*", re.IGNORECASE)}
+        res = recipesCollection.find_one(filter)
+
+        res["_id"] = str(res["_id"])
+        print(res)
+        return res
+
     except Exception as e:
         print(e)
         return {"error": e}

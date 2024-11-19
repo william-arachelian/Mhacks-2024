@@ -63,7 +63,7 @@ def is_valid_recipe(input):
         return False
     
     for key in input.keys():
-            if not ("ingredients" == key or "instructions" == key or "ratings" == key  or "name" == key or "_id" == key):
+            if not ("ingredients" == key or "instructions" == key or "ratings" == key  or "name" == key or "_id" == key or "description" == key or "cookTime" == key):
                 print("schema not correct")
                 return False
     
