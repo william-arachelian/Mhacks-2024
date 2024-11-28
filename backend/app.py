@@ -76,11 +76,11 @@ def recipes_add_handler():
     
     return jsonify({"message": "Success", "status_code": 201, "output": context}), 201
 
-@app.route("/recipes/findByName/<string:recipe_name>")
+@app.route("/recipes/searchByName/<string:recipe_name>")
 def recipes_findByName_handler(recipe_name):
     print(recipe_name)
-    res = find_recipe_by_name(str(recipe_name))
-    return {"recipe" : res}
+    res = search_recipe_by_name(str(recipe_name))
+    return {"recipes" : res}
 
 @app.route("/recipes/delete/<string:recipe_id>", methods=["DELETE"])
 def recipes_delete_handler(recipe_id):

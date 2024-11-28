@@ -10,7 +10,7 @@ const GenerateRecipes = () =>{
 
   const handleGenerate = () => {
     axios.get("http://127.0.0.1:5000/recipes/generate")
-    .then((response) =>{
+    .then((response) => {
       console.log(response) 
       setRecipeList([...response.data["recipes"]])
     }

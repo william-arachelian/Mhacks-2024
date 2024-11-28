@@ -12,6 +12,7 @@ const SingleRecipe = () => {
 
     const [saved, setSaved] = useState(false);
     const {name, ingredients, instructions, description, cookTime} = route.params;
+
     const [recipeObj, setRecipeObj] = useState({
         "name":name,
         "ingredients":ingredients, 
@@ -34,9 +35,6 @@ const SingleRecipe = () => {
             console.log(e);
         })
     }, [])
-    // useEffect(() => {
-    //     console.log(recipeObj);
-    // }, [recipeObj]);
 
     const handleSave = () => {
         if (!saved){

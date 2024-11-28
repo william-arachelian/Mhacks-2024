@@ -40,7 +40,7 @@ export default function TabsLayout()
       }}
     />
      <Tabs.Screen
-      name="SavedRecipes"
+      name="(SavedRecipes)"
       options={{
         title: 'Saved',
         headerShown: false,

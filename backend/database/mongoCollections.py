@@ -203,16 +203,14 @@ def add_recipe(input: dict):
         print(e)
         return {"error": e}
 
-def find_recipe_by_name(name: str):
+def search_recipe_by_name(name: str):
     try:
         
         db = get_database()
         recipesCollection = db['recipes']
         filter = {"name": re.compile(f"^{re.escape(name)}.*", re.IGNORECASE)}
-        res = recipesCollection.find_one(filter)
-
-        res["_id"] = str(res["_id"])
-        print(res)
+        res = list(recipesCollection.find(filter))
+        res = list(map(lambda obj : {**obj, "_id": str(obj["_id"])}, res))
         return res
 
     except Exception as e:

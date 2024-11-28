@@ -14,13 +14,6 @@ const GenerateRecipeLayout = () => {
             name="GenerateRecipes"
             options={{headerShown: false}}
         />
-
-        <Stack.Screen 
-            name="SingleRecipe"
-            options={{title: ""}}
-
-        />
-
         
     </Stack>
 }
