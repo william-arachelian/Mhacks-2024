@@ -11,8 +11,8 @@ const GenerateRecipes = () =>{
   const handleGenerate = () => {
     axios.get("http://127.0.0.1:5000/recipes/generate")
     .then((response) => {
-      console.log(response) 
-      setRecipeList([...response.data["recipes"]])
+      console.log(response.data.recipes) 
+      setRecipeList([...response.data.recipes])
     }
     
     )

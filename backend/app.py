@@ -76,8 +76,14 @@ def recipes_add_handler():
     
     return jsonify({"message": "Success", "status_code": 201, "output": context}), 201
 
+@app.route("/recipes/findOneByName/<string:recipe_name>")
+def recipes_findOneByName_handler(recipe_name):
+    print(recipe_name)
+    res = find_one_recipe_by_name(str(recipe_name))
+    return {"recipe" : res}
+
 @app.route("/recipes/searchByName/<string:recipe_name>")
-def recipes_findByName_handler(recipe_name):
+def recipes_searchByName_handler(recipe_name):
     print(recipe_name)
     res = search_recipe_by_name(str(recipe_name))
     return {"recipes" : res}

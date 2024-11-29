@@ -203,6 +203,20 @@ def add_recipe(input: dict):
         print(e)
         return {"error": e}
 
+def find_one_recipe_by_name(name: str):
+  
+    db = get_database()
+    recipesCollection = db['recipes']
+    filter = {"name": re.compile(f"^{re.escape(name)}.*", re.IGNORECASE)}
+    res = recipesCollection.find_one(filter)
+    if res == None:
+        raise LookupError("Recipe not found")
+
+    res = {**res, "_id": str(res["_id"])}
+    return res
+
+   
+    
 def search_recipe_by_name(name: str):
     try:
         

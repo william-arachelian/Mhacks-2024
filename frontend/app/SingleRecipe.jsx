@@ -22,17 +22,15 @@ const SingleRecipe = () => {
         });
 
     useEffect(()=>{
-        axios.get(`http://127.0.0.1:5000/recipes/findByName/${recipeObj.name}`)
+        axios.get(`http://127.0.0.1:5000/recipes/findOneByName/${recipeObj.name}`)
         .then((response) => {
-            if (response.data.recipe != null) {
-                setSaved(true)
-                setRecipeObj((prev) => ({ ...prev, _id: response.data.recipe._id }));
-            }
-            else
-                setSaved(false)
+            // console.log(response.data)
+            setSaved(true)
+            setRecipeObj((prev) => ({ ...prev, _id: response.data.recipe._id })); 
         })
         .catch((e) => {
-            console.log(e);
+            setSaved(false)
+
         })
     }, [])
 

@@ -69,7 +69,7 @@ const SavedRecipes = () =>{
         <ScrollView
            className="px-10"
         >
-            {recipes.map((recipe, i) => {
+            {recipes.reverse().map((recipe, i) => {
                 return <RecipeListItem 
                     key={i}
                     name={recipe.name}
