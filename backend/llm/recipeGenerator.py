@@ -13,7 +13,7 @@ def generate_recipes_langGroq():
     ingredients_list = [ingredient['name'] for ingredient in ingredients_list]
 
     llm = ChatGroq(
-        api_key="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",
+        api_key=GROQ_API_KEY,
         model="mixtral-8x7b-32768",
         temperature=0.2,
         max_tokens=None,
