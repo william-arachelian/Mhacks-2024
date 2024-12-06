@@ -3,18 +3,22 @@ from datetime import datetime
 from database.mongoConnection import get_database
 from bson.objectid import ObjectId
 from bson.json_util import dumps, loads 
+import re
 # Schemas:
 
 # ingredients {
 #     name: str
-#     date: date
 #     quantity(?): float
+#     unit(?): {set of units to choose from}
+#     expirationDate: datetime object
 # }
 
 # recipes {
 #     name: str
 #     ingredients[]: arr[Obj]
 #     instructions[]: arr[str]
+#     description: str
+#     estimatedCookTime: str
 #     rating(?): int
 # }
 
@@ -55,19 +59,36 @@ def get_ingredient(id: str):
         print(e)
         return {"error": e}
 
+def search_ingredient_by_name(name: str):
+    try:
+        db = get_database()
+        ingredeintsCollection = db['ingredients']
+
+        filter = {"name": re.compile(f"^{re.escape(name)}.*", re.IGNORECASE)}
+        res = list(ingredeintsCollection.find(filter))
+
+        res = list(map(lambda obj : {**obj, "_id": str(obj["_id"])}, res))
+        return res
+    
+    except Exception as e:
+        print(e)
+        return {"error": e}
+
 def add_ingredient(input:dict):
     # adds a new ingredient object with parameters in input dictionary
     # input{name, Date=currentDate, quantity=None}
     # returns success or failure
-
     try:
+        print(input)
         if not is_valid_ingredient(input):
             raise ValueError("invalid ingredient input")
         
+       
         ingredientObj = {
-            "name": input['name'],
-            "date": datetime.now(),
-            "quantity": input['quantity'] if input.get('quantity') != None else 1
+            "name": input.get('name'),
+            "expirationDate": input.get("expirationDate"),
+            "quantity": input.get('quantity'),
+            "unit": input.get('unit')
         }
 
         db = get_database()
@@ -150,7 +171,6 @@ def add_recipe(input: dict):
     # adds a new recipe object with parameters in input dictionary
     # input{name, description, rating=none, ingredients[]}
     # returns success or failure
-    print(input)
     try:
         if not is_valid_recipe(input):
             raise ValueError("invalid recipe input")
@@ -159,7 +179,9 @@ def add_recipe(input: dict):
             "name": input['name'],
             "instructions": input['instructions'],
             "rating": input['rating'] if input.get('rating') != None else -1,
-            "ingredients": input['ingredients']
+            "ingredients": input['ingredients'],
+            "description": input['description'],
+            "cookTime": input["cookTime"]
         }
 
         db = get_database()
@@ -167,12 +189,44 @@ def add_recipe(input: dict):
 
         res = recipesCollection.insert_one(recipeObj)
 
-        if res:
-            recipeObj["id"] = res.inserted_id
+        if res.inserted_id:
+            insertedRecipeObj = recipesCollection.find_one({"_id": res.inserted_id})
+            insertedRecipeObj["_id"] = str(insertedRecipeObj["_id"] )
+            print(insertedRecipeObj)
+
+            return insertedRecipeObj
         else:
             raise ValueError("Insertion Failed")
-        return recipeObj
+       
         
+    except Exception as e:
+        print(e)
+        return {"error": e}
+
+def find_one_recipe_by_name(name: str):
+  
+    db = get_database()
+    recipesCollection = db['recipes']
+    filter = {"name": re.compile(f"^{re.escape(name)}.*", re.IGNORECASE)}
+    res = recipesCollection.find_one(filter)
+    if res == None:
+        raise LookupError("Recipe not found")
+
+    res = {**res, "_id": str(res["_id"])}
+    return res
+
+   
+    
+def search_recipe_by_name(name: str):
+    try:
+        
+        db = get_database()
+        recipesCollection = db['recipes']
+        filter = {"name": re.compile(f"^{re.escape(name)}.*", re.IGNORECASE)}
+        res = list(recipesCollection.find(filter))
+        res = list(map(lambda obj : {**obj, "_id": str(obj["_id"])}, res))
+        return res
+
     except Exception as e:
         print(e)
         return {"error": e}

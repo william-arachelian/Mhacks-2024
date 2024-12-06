@@ -1,7 +1,7 @@
 from database.mongoCollections import * 
 from database.mongoCollections import get_database
 from random import randint
-
+from datetime import datetime, date
 db = get_database()
 ingredientsCollection = db['ingredients']
 
@@ -35,8 +35,12 @@ ingredient_names = [
 
 for i in range(0, len(ingredient_names)):
     try:
+        
         ingredientObj = {
-            "name": ingredient_names[i]
+            "name": ingredient_names[i],
+            "quantity": 1,
+            "expirationDate": datetime.now().isoformat(),
+            "unit": ""
         }
         
         res = add_ingredient(ingredientObj)

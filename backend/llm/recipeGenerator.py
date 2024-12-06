@@ -1,87 +1,19 @@
 from groq import Groq
 import ast
 from langchain_groq import ChatGroq
+from langchain.prompts import PromptTemplate
+from langchain.output_parsers import StructuredOutputParser, ResponseSchema
+from langchain.chains import LLMChain
 from database.mongoCollections import get_ingredients
-from backend.config import GROQ_API_KEY 
-
-def generate_recipe_groq():
-#get ingredients list from backend
-    ingredients_list = [ingredient['name'] for ingredient in ingredients_list]
-    # ingredients_list = [
-    #     'Flour',
-    #     'Sugar',
-    #     'Eggs',
-    #     'Milk',
-    #     'Baking Powder',
-    #     'Salt',
-    #     'Butter',
-    #     'Vanilla Extract',
-    #     'Olive Oil',
-    #     'Garlic',
-    #     'Onion',
-    #     'Tomato',
-    #     'Chicken Breast',
-    #     'Ground Beef',
-    #     'Rice',
-    #     'Pasta',
-    #     'Cheese',
-    #     'Spinach',
-    #     'Lettuce',
-    #     'Carrots',
-    #     'Bell Peppers',
-    #     'Potatoes',
-    #     'Broccoli',
-    #     'Zucchini',
-    #     'Mushrooms'
-    # ]    
-    ingredients_toString = ", ".join(ingredients_list)
-
-    client = Groq(
-        api_key=GROQ_API_KEY()
-    )
-
-    chat_completion = client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": f"Create 10 recipes that can be made with the following ingredients (you dont have to use the whole list): {ingredients_toString}. The recipe must be returned as a python dictionary with the following format: recipe_(number) = {{name: (string name of recipe), instructions: (list of each instruction step in order), ingredients: (list of ingredient names)}}",
-            }
-        ],
-        model="mixtral-8x7b-32768",
-    )
-    response = chat_completion.choices[0].message.content
-    #print("original response: ",response)
-
-    #format response into dictionary:
-
-    recipes = []
-    lower_bound = 0
-
-    while response[lower_bound:].find('{') != -1: 
-    
-        parseString = response[lower_bound:]
-        start = parseString.find('{') + lower_bound
-        end =  parseString.find('}') + lower_bound
-
-        recipe_dict_string = response[start: end+1]
-        recipe_dict = ast.literal_eval(recipe_dict_string)
-
-        recipes.append(recipe_dict)
-        #print("parsed string index:", (start, end))
-        lower_bound = end + 5
-
-    return recipes
+import re
 
 def generate_recipes_langGroq():
     
     ingredients_list = get_ingredients()
-    
     ingredients_list = [ingredient['name'] for ingredient in ingredients_list]
 
-    ingredients_toString = ", ".join(ingredients_list)
-
     llm = ChatGroq(
-        api_key=GROQ_API_KEY(),
+        api_key="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",
         model="mixtral-8x7b-32768",
         temperature=0.2,
         max_tokens=None,
@@ -89,36 +21,66 @@ def generate_recipes_langGroq():
         max_retries=2,
     )
 
-    messages = [
-        ("system", f"You are a chef. Make 5 recipes {' with the ingredients that the user lists out. If you recognize a type in the ingredients list, you can correct it.' if len(ingredients_list) != 0 else ' with affordable ingredients'}. The recipes must be in the form of a python dictionary with three attributes, name, instructions, and ingredients: recipe = {{name: (title of recipe), instructions: (array of steps in order), ingredients: (list of ingredients for the recipe)}}"),
-        ("human", ingredients_toString),
+    response_schemas = [
+        ResponseSchema(name="name", description="The name of the recipe."),
+        ResponseSchema(name="ingredients", description="Array List of ingredients with measurements to make recipe."),
+        ResponseSchema(name="instructions", description="Array List of step-by-step instructions for making recipe."),
+        ResponseSchema(name="description", description="100 word description of recipe."),
+        ResponseSchema(name="cookTime", description="Estimated cook time for recipe."),
     ]
-    llm.invoke(messages)
 
-    stream = llm.stream(messages)
-    full = next(stream)
-    for chunk in stream:
-        full += chunk
+    output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
+
+    format_instructions = output_parser.get_format_instructions()
+    prompt = PromptTemplate(
+        template="Generate a JSON object:\n{format_instructions}\nInput: {input}",
+        input_variables=["input"],
+        partial_variables={"format_instructions": format_instructions},
+    )
+
+    input_data = f"Create 5 recipes based off of these ingredients: {ingredients_list}"
+    llm_chain = LLMChain(llm=llm, prompt=prompt)
+    response = llm_chain.run(input=input_data)
+    print(response)
+
+    pattern = r"```json\n(.*?)\n```"
+    matches = re.findall(pattern, response, re.DOTALL)
+    recipes = [output_parser.parse(match) for match in matches]
     
-    response = full.content
-
-    recipes = []
-    lower_bound = 0
-
-    while response[lower_bound:].find('{') != -1: 
-    
-        parseString = response[lower_bound:]
-        start = parseString.find('{') + lower_bound
-        end =  parseString.find('}') + lower_bound
-
-        recipe_dict_string = response[start: end+1]
-        recipe_dict = ast.literal_eval(recipe_dict_string)
-
-        recipes.append(recipe_dict)
-        lower_bound = end + 5
-
     return recipes
 
+    # messages = [
+    #     ("system", f"You are a chef. Make 5 recipes {' with the ingredients that the user lists out. If you recognize a type in the ingredients list, you can correct it.' if len(ingredients_list) != 0 else ' with affordable ingredients'}. The recipes must be in the form of a python dictionary with 5 attributes, name, instructions, ingredients, description, cookTime: recipe = {{name: string, instructions: array[], ingredients: array[], description: string, cookTime: string}}"),
+    #     ("human", ingredients_toString),
+    # ]
+    # llm.invoke(messages)
+
+    # stream = llm.stream(messages)
+    # full = next(stream)
+    # for chunk in stream:
+    #     full += chunk
+    
+    # response = full.content
+
+    # recipes = []
+    # lower_bound = 0
+
+    # while response[lower_bound:].find('{') != -1: 
+    
+    #     parseString = response[lower_bound:]
+    #     start = parseString.find('{') + lower_bound
+    #     end =  parseString.find('}') + lower_bound
+
+    #     recipe_dict_string = response[start: end+1].replace('\"', '"')
+    #     recipe_dict = json.loads(recipe_dict_string)
+    #     #recipe_dict = ast.literal_eval(recipe_dict_string)
+
+    #     recipes.append(recipe_dict)
+    #     lower_bound = end + 5
+
+    # return recipes
+
+    #return {'recipes' : response}
 # recipes = generate_recipes_langGroq()
 
 # for r in recipes:
